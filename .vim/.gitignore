@@ -1,0 +1,6 @@
+bundle/*
+eclim/*
+plugin/*
+!bundle/vundle/*
+!bundle/vundle
+!.keep

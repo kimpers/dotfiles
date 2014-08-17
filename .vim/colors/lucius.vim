@@ -1,0 +1,1 @@
+bundle/vim-lucius/colors/lucius.vim
