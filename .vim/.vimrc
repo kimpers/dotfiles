@@ -58,6 +58,7 @@ Bundle 'jpo/vim-railscasts-theme'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'tpope/vim-repeat.git'
 Bundle 'benmills/vimux'
+Bundle 'wookiehangover/jshint.vim'
 
 " ------------------------------------------------------------------------
 filetype plugin indent on

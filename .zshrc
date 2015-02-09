@@ -96,3 +96,12 @@ export LANGUAGE=en_US.UTF-8
 mdless(){
 pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less;
 }
+
+# Alias naut to open
+alias open='nautilus'
+
+export NVM_DIR="/home/kikko/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

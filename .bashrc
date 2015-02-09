@@ -124,3 +124,16 @@ alias vi="/usr/local/bin/vim"
 
 # Other
 export PATH="$HOME/scripts:$PATH"
+
+
+# NVM
+if [ -s ~/.nvm/nvm.sh ]; then
+	NVM_DIR=~/.nvm
+	source ~/.nvm/nvm.sh
+fi
+
+# NVM
+if [ -s ~/.nvm/nvm.sh ]; then
+	NVM_DIR=~/.nvm
+	source ~/.nvm/nvm.sh
+fi
