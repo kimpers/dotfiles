@@ -91,8 +91,12 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:jedi#popup_on_dot = 0
 
 " Lucius theme
-colorscheme lucius
-LuciusBlack
+" colorscheme lucius
+" LuciusBlack
+
+" Solarized theme
+set background=dark
+colorscheme solarized
 
 " Vim-ruby
 autocmd FileType ruby,eruby compiler ruby

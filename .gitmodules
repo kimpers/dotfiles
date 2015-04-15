@@ -7,3 +7,9 @@
 [submodule "oh-my-zsh/plugins/zsh-256color"]
 	path = oh-my-zsh/plugins/zsh-256color
 	url = git@github.com:chrissicool/zsh-256color.git
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:powerline/fonts.git
+[submodule "themes/terminator-solarized"]
+	path = themes/terminator-solarized
+	url = git@github.com:ghuntley/terminator-solarized.git
