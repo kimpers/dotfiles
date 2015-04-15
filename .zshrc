@@ -81,7 +81,6 @@ export PATH="/home/kikko/scripts:/home/kikko/.rbenv/plugins/ruby-build/bin:/home
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 # Vim settings
-export TERM=screen-256color
 export VISUAL=vim
 export EDITOR=vim
 alias vi="/usr/local/bin/vim"

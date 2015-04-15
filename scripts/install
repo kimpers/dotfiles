@@ -14,6 +14,11 @@ function install {
 
   # ZSH
   ln -sf "$dotfiles_dir/.zshrc" ~/.zshrc
+  ln -sf "$dotfiles_dir/.oh-my-zsh/plugins" "$ZSH/custom/plugins"
+  # Removing the default empty folder
+  rm -r "$ZSH/custom/plugins"
+  ln -sf "$dotfiles_dir/oh-my-zsh/plugins"  "$ZSH/custom"
+
 
   # Tmux
   ln -sf "$dotfiles_dir/.tmux.conf" ~/.tmux.conf
