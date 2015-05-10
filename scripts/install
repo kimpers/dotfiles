@@ -9,12 +9,8 @@ echo
 
 function install {
 
-  # Bash
-  ln -sf "$dotfiles_dir/.bashrc" ~/.bashrc
-
   # ZSH
   ln -sf "$dotfiles_dir/.zshrc" ~/.zshrc
-  ln -sf "$dotfiles_dir/.oh-my-zsh/plugins" "$ZSH/custom/plugins"
   # Patched font for theme
   fonts/install.sh
   # Removing the default empty folder
