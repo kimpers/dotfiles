@@ -104,3 +104,10 @@ export NVM_DIR="/home/kikko/.nvm"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+alias rm='echo "rm is disabled, use tr or /bin/rm instead."'
+# Shorthand for trash
+alias tr=trash
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+

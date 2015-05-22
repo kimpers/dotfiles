@@ -1,0 +1,10 @@
+[user]
+	email = kimpersson88@gmail.com
+	name = Kim Persson
+[push]
+	default = simple
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status

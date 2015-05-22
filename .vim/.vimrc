@@ -48,7 +48,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'zhaocai/GoldenView.Vim'
-Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-dispatch'
@@ -59,6 +58,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'tpope/vim-repeat.git'
 Bundle 'benmills/vimux'
 Bundle 'wookiehangover/jshint.vim'
+Bundle 'lervag/vimtex'
+Bundle 'qpkorr/vim-bufkill'
 
 " ------------------------------------------------------------------------
 filetype plugin indent on
@@ -104,9 +105,14 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
+" Latex specific settings
+autocmd FileType tex set spell spelllang=en_us
+
 " Vimux
 " Run the current file with rspec
 map <Leader>rb :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
+" Run all specs
+map <Leader>ra :call VimuxRunCommand("clear; bundle exec rspec")<CR>
 " Promt for a command to run
 map <Leader>rp :VimuxPromptCommand<CR>
 " Inspect runner pane
@@ -133,12 +139,6 @@ set t_Co=256
 
 " Highlight matching bracket/parantheses
 autocmd vimenter * DoMatchParen
-
-" Rainbow parantheses
-au VimEnter * RainbowParenthesesToggle
-au VimEnter * RainbowParenthesesLoadRound
-au VimEnter * RainbowParenthesesLoadSquare
-au VimEnter * RainbowParenthesesLoadBraces
 
 " IndentGuides
 au VimEnter * IndentGuidesEnable
@@ -225,6 +225,9 @@ set smarttab      " insert tabs on the start of a line according to
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 
+set splitbelow    " spawn horizontal splits below instead of above"
+set splitright    " spawn vertical splits to the right instead of left"
+
 " Keymappings --------------------------------------------------------------------------------
 
 " Map ctrl-d to toggle between vim and terminal
@@ -275,4 +278,8 @@ for prefix in ['i', 'n', 'v']
   endfor
 endfor
 
-
+" Toggle text folding easily with F9
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
