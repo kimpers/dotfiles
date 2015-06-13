@@ -87,9 +87,19 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 
 " YouCompleteMe
 let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_filetype_blacklist = {
+      \ 'tex' : 1,
+      \ 'markdown' : 1,
+      \ 'text' : 1
+      \}
 
 " Vim Jedi
 let g:jedi#popup_on_dot = 0
+
+" GitGutter
+" Performance optimization
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " Lucius theme
 " colorscheme lucius
@@ -106,7 +116,15 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Latex specific settings
-autocmd FileType tex set spell spelllang=en_us
+autocmd BufNewFile,BufRead *.tex set spell spelllang=en_us
+" Fix to make large Latex files not be slow in Vim
+autocmd FileType tex :NoMatchParen
+autocmd FileType tex :syntax sync minlines=256
+autocmd FileType tex :syntax sync maxlines=500
+au FileType tex setlocal nocursorline
+au FileType tex setlocal nocursorcolumn
+au FileType tex setlocal norelativenumber
+au FileType tex setlocal synmaxcol=200
 
 " Vimux
 " Run the current file with rspec

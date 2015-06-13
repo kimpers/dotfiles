@@ -111,3 +111,8 @@ alias tr=trash
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# Chef-dk
+export PATH="/opt/chefdk/bin:$PATH"
+
+# Add amzon ssh key
+ssh-add ~/.ssh/ec2.pem > /dev/null 2>&1
