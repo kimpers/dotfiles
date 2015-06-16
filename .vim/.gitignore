@@ -1,6 +1,6 @@
 bundle/*
 eclim/*
 plugin/*
-!bundle/vundle/*
-!bundle/vundle
+plugged
 !.keep
+.vim

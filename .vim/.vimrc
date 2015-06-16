@@ -1,66 +1,66 @@
 " Standard settings
+"
 set nocompatible              " be iMproved, required
 syntax on
 
-" Vundle configurations
-" -----------------------------------------------------------------------
-filetype off                  " required
+"Setup
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+" Plugs to install
+" General
+Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'sickill/vim-pasta'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-textobj-user'
+Plug 'junegunn/vim-easy-align'
+Plug 'matze/vim-move'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'sheerun/vim-polyglot'
+Plug 'szw/vim-ctrlspace'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'zhaocai/GoldenView.Vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-repeat'
+Plug 'benmills/vimux'
+Plug 'qpkorr/vim-bufkill'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/unite.vim'
+"Plug 'tpope/vim-dispatch'
+"Plug 'jonathanfilip/vim-lucius'
+"Plug 'jpo/vim-railscasts-theme'
 
-" Bundles to install
-Bundle 'tpope/vim-fugitive'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'tpope/vim-rails.git'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'sickill/vim-pasta'
-Bundle 'sjl/gundo.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'moll/vim-node'
-Bundle 'scrooloose/syntastic'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'sidorares/node-vim-debugger'
-Bundle 'myhere/vim-nodejs-complete'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'JulesWang/css.vim'
-Bundle 'kana/vim-textobj-indent'
-Bundle 'kana/vim-textobj-user'
-Bundle 'junegunn/vim-easy-align'
-Bundle 'kien/ctrlp.vim'
-Bundle 'matze/vim-move'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'ntpeters/vim-better-whitespace'
-Bundle 'sheerun/vim-polyglot'
-"Bundle 'szw/vim-ctrlspace' learn some other time
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'terryma/vim-expand-region'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'zhaocai/GoldenView.Vim'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-dispatch'
-Bundle 'astashov/vim-ruby-debugger'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'jpo/vim-railscasts-theme'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'tpope/vim-repeat.git'
-Bundle 'benmills/vimux'
-Bundle 'wookiehangover/jshint.vim'
-Bundle 'lervag/vimtex'
-Bundle 'qpkorr/vim-bufkill'
+" Ruby
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'tpope/vim-endwise', {'for': 'ruby'}
 
+" Javascript
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
+Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+
+" Other
+Plug 'digitaltoad/vim-jade', {'for': 'jade'}
+Plug 'JulesWang/css.vim', {'for': 'css'}
+Plug 'lervag/vimtex', {'for': 'tex'}
+
+call plug#end()
 " ------------------------------------------------------------------------
 filetype plugin indent on
 
@@ -80,6 +80,20 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
 autocmd FileType php,java
 	\if &completefunc != '' | let &omnifunc=&completefunc | endif
+
+" Unite.vim
+" Content search
+nnoremap <leader>/ :Unite grep:.<cr>
+
+" File selection
+nnoremap <C-p> :Unite file_rec/async<cr>
+
+" Yank history
+let g:unite_source_history_yank_enable = 1
+nnoremap <leader>y :Unite history/yank<cr>
+
+"Buffer switching
+nnoremap <leader>s :Unite -quick-match buffer<cr>
 
 " Ultisnips selection on ctrl-j to stop interference
 " with YouCompleteMe
@@ -173,13 +187,6 @@ nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
 nmap <silent> <S-N>  <Plug>GoldenViewNext
 nmap <silent> <S-P>  <Plug>GoldenViewPrevious
 
-" CtrP
-let g:ctrlp_extensions = ['funky']
-let g:ctrlp_funky_syntax_highlight = 1
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-
 " Easy-align
 " Start interactive EasyAlign in visual mode
 vmap <Enter> <Plug>(EasyAlign)
@@ -188,9 +195,9 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " Vim-surround
 " ERB tags
-"autocmd FileType eruby let g:surround_45 = "<% \r %>"
-"autocmd FileType eruby let g:surround_61 = "<%= \r %>"
-"autocmd FileType eruby let g:surround_33 = "```\r```"
+autocmd FileType eruby let g:surround_45 = "<% \r %>"
+autocmd FileType eruby let g:surround_61 = "<%= \r %>"
+autocmd FileType eruby let g:surround_33 = "```\r```"
 
 " ALT key bindings in terminal mode workaround to get terminal vim 
 " to pick up on M-key bindings
@@ -216,10 +223,6 @@ autocmd FileType java set tabstop=4
 autocmd FileType java set shiftwidth=4
 autocmd FileType java set softtabstop=4
 set expandtab
-
-" New vertical splits to the right and horizontal below
-:set splitright
-:set splitbelow
 
 " General settings
 set hidden
@@ -248,9 +251,6 @@ set splitright    " spawn vertical splits to the right instead of left"
 
 " Keymappings --------------------------------------------------------------------------------
 
-" Map ctrl-d to toggle between vim and terminal
-noremap <C-d> :sh<cr>
-
 " Ctrl F6 to toggle GUndo
 nnoremap <C-F6> :GundoToggle<CR>
 
@@ -261,10 +261,6 @@ nnoremap <C-F7> :NERDTreeToggle<CR>
 :imap jj <Esc>
 :imap jk <Esc>
 :imap kj <Esc>
-
-" CTRL-C/V binding to system clipboard
-vnoremap <C-c> "+y
-noremap <C-v> "+p
 
 " Quick edit vimrc in vertical split
 nmap <silent> <leader>ev :vsplit $MYVIMRC<CR>
