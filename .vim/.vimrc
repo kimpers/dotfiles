@@ -27,7 +27,6 @@ Plug 'matze/vim-move'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sheerun/vim-polyglot'
-Plug 'szw/vim-ctrlspace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
@@ -43,6 +42,7 @@ Plug 'Shougo/unite.vim'
 "Plug 'tpope/vim-dispatch'
 "Plug 'jonathanfilip/vim-lucius'
 "Plug 'jpo/vim-railscasts-theme'
+"Plug 'szw/vim-ctrlspace'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
