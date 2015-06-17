@@ -69,146 +69,6 @@ let mapleader="\<Space>"
 
 runtime macros/matchit.vim
 
-" Omni complete functions
-autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-" Eclim should only autocomplete some files
-autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
-autocmd FileType php,java
-	\if &completefunc != '' | let &omnifunc=&completefunc | endif
-
-" Unite.vim
-" Content search
-nnoremap <leader>/ :Unite grep:.<cr>
-
-" File selection
-nnoremap <C-p> :Unite file_rec/async<cr>
-
-" Yank history
-let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :Unite history/yank<cr>
-
-"Buffer switching
-nnoremap <leader>s :Unite -quick-match buffer<cr>
-
-" Ultisnips selection on ctrl-j to stop interference
-" with YouCompleteMe
-let g:UltiSnipsExpandTrigger = '<c-j>'
-
-" YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_filetype_blacklist = {
-      \ 'tex' : 1,
-      \ 'markdown' : 1,
-      \ 'text' : 1
-      \}
-
-" Vim Jedi
-let g:jedi#popup_on_dot = 0
-
-" GitGutter
-" Performance optimization
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
-
-" Lucius theme
-" colorscheme lucius
-" LuciusBlack
-
-" Solarized theme
-set background=dark
-colorscheme solarized
-
-" Vim-ruby
-autocmd FileType ruby,eruby compiler ruby
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
-" Latex specific settings
-autocmd BufNewFile,BufRead *.tex set spell spelllang=en_us
-" Fix to make large Latex files not be slow in Vim
-autocmd FileType tex :NoMatchParen
-autocmd FileType tex :syntax sync minlines=256
-autocmd FileType tex :syntax sync maxlines=500
-au FileType tex setlocal nocursorline
-au FileType tex setlocal nocursorcolumn
-au FileType tex setlocal norelativenumber
-au FileType tex setlocal synmaxcol=200
-
-" Vimux
-" Run the current file with rspec
-map <Leader>rb :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
-" Run all specs
-map <Leader>ra :call VimuxRunCommand("clear; bundle exec rspec")<CR>
-" Promt for a command to run
-map <Leader>rp :VimuxPromptCommand<CR>
-" Inspect runner pane
-map <Leader>ri :VimuxInspectRunner<CR>
-" Run last vimux command
-map <Leader>rl :VimuxRunLastCommand<CR>
-" Close vim tmux runner opened by vimux
-map <Leader>rq :VimuxCloseRunner<CR>
-" Interrupt any command running in the runner pane
-map <Leader>rs :VimuxInterruptRunner<CR>
-" Split tmuxpane horizontally
-let g:VimuxOrientation = "h"
-
-
-" Powerline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-" Always show statusline
-set laststatus=2
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
-
-" Nerdtree autostart if vim is started without file argument
-"autocmd vimenter * if !argc() | NERDTree | endif
-
-" Highlight matching bracket/parantheses
-autocmd vimenter * DoMatchParen
-
-" IndentGuides
-au VimEnter * IndentGuidesEnable
-
-" GoldenView
-let g:goldenview__enable_default_mapping = 0
-" 1. split to tiled windows
-nmap <silent> <S-L>  <Plug>GoldenViewSplit
-" 2. quickly switch current window with the main pane
-" and toggle back
-nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
-nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
-" 3. jump to next and previous window
-nmap <silent> <S-N>  <Plug>GoldenViewNext
-nmap <silent> <S-P>  <Plug>GoldenViewPrevious
-
-" Easy-align
-" Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
-" Start interactive EasyAlign with a Vim movement
-nmap <Leader>a <Plug>(EasyAlign)
-
-" Vim-surround
-" ERB tags
-autocmd FileType eruby let g:surround_45 = "<% \r %>"
-autocmd FileType eruby let g:surround_61 = "<%= \r %>"
-autocmd FileType eruby let g:surround_33 = "```\r```"
-
-" ALT key bindings in terminal mode workaround to get terminal vim 
-" to pick up on M-key bindings
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set timeout ttimeoutlen=50
-
 " Settings ----------------------------------------------------------------------------------
 
 " Set hybrid relative and absolute line numbers
@@ -297,3 +157,146 @@ inoremap <F9> <C-O>za
 nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
+
+" Plugins --------------------------------------------------------------------------------------
+
+" Omni complete functions
+autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+" Eclim should only autocomplete some files
+autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
+autocmd FileType php,java
+	\if &completefunc != '' | let &omnifunc=&completefunc | endif
+
+" Unite.vim
+" Content search
+nnoremap <leader>/ :Unite grep:.<cr>
+
+" File selection
+nnoremap <C-p> :Unite file_rec/async<cr>
+
+" Yank history
+let g:unite_source_history_yank_enable = 1
+nnoremap <leader>y :Unite history/yank<cr>
+
+"Buffer switching
+nnoremap <leader>s :Unite -quick-match buffer<cr>
+
+" Ultisnips selection on ctrl-j to stop interference
+" with YouCompleteMe
+let g:UltiSnipsExpandTrigger = '<c-j>'
+
+" YouCompleteMe
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_filetype_blacklist = {
+      \ 'tex' : 1,
+      \ 'markdown' : 1,
+      \ 'text' : 1
+      \}
+
+" Vim Jedi
+let g:jedi#popup_on_dot = 0
+
+" GitGutter
+" Performance optimization
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+
+" Lucius theme
+" colorscheme lucius
+" LuciusBlack
+
+" Solarized theme
+set background=dark
+colorscheme solarized
+
+" Vim-ruby
+autocmd FileType ruby,eruby compiler ruby
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+" Latex specific settings
+autocmd BufNewFile,BufRead *.tex set spell spelllang=en_us
+" Fix to make large Latex files not be slow in Vim
+"autocmd FileType tex :NoMatchParen
+" autocmd FileType tex :syntax sync minlines=256
+" autocmd FileType tex :syntax sync maxlines=500
+au FileType tex setlocal nocursorline
+au FileType tex setlocal nocursorcolumn
+au FileType tex setlocal norelativenumber
+"au FileType tex setlocal synmaxcol=200
+
+" Vimux
+" Run the current file with rspec
+map <Leader>rb :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
+" Run all specs
+map <Leader>ra :call VimuxRunCommand("clear; bundle exec rspec")<CR>
+" Promt for a command to run
+map <Leader>rp :VimuxPromptCommand<CR>
+" Inspect runner pane
+map <Leader>ri :VimuxInspectRunner<CR>
+" Run last vimux command
+map <Leader>rl :VimuxRunLastCommand<CR>
+" Close vim tmux runner opened by vimux
+map <Leader>rq :VimuxCloseRunner<CR>
+" Interrupt any command running in the runner pane
+map <Leader>rs :VimuxInterruptRunner<CR>
+" Split tmuxpane horizontally
+let g:VimuxOrientation = "h"
+
+
+" Powerline
+set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" Always show statusline
+set laststatus=2
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
+
+" Nerdtree autostart if vim is started without file argument
+"autocmd vimenter * if !argc() | NERDTree | endif
+
+" Highlight matching bracket/parantheses
+autocmd vimenter * DoMatchParen
+
+" IndentGuides
+au VimEnter * IndentGuidesEnable
+
+" GoldenView
+let g:goldenview__enable_default_mapping = 0
+" 1. split to tiled windows
+nmap <silent> <S-L>  <Plug>GoldenViewSplit
+" 2. quickly switch current window with the main pane
+" and toggle back
+nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
+nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
+" 3. jump to next and previous window
+nmap <silent> <S-N>  <Plug>GoldenViewNext
+nmap <silent> <S-P>  <Plug>GoldenViewPrevious
+
+" Easy-align
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign with a Vim movement
+nmap <Leader>a <Plug>(EasyAlign)
+
+" Vim-surround
+" ERB tags
+autocmd FileType eruby let g:surround_45 = "<% \r %>"
+autocmd FileType eruby let g:surround_61 = "<%= \r %>"
+autocmd FileType eruby let g:surround_33 = "```\r```"
+
+" ALT key bindings in terminal mode workaround to get terminal vim 
+" to pick up on M-key bindings
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set timeout ttimeoutlen=50
+
