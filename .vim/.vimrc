@@ -24,7 +24,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
-Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
@@ -48,12 +47,13 @@ Plug 'Shougo/unite.vim'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
+Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
-Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+Plug 'shutnik/jshint2.vim', {'for': 'javascript'}
 
 " Other
 Plug 'digitaltoad/vim-jade', {'for': 'jade'}
@@ -220,8 +220,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
+" Text and latex specific settings
+au FileType text,tex setlocal wrap linebreak nolist spell spelllang=en_us
 " Latex specific settings
-autocmd BufNewFile,BufRead *.tex set spell spelllang=en_us
 " Fix to make large Latex files not be slow in Vim
 "autocmd FileType tex :NoMatchParen
 " autocmd FileType tex :syntax sync minlines=256

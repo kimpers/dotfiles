@@ -4,3 +4,4 @@ plugin/*
 plugged
 !.keep
 .vim
+spell
