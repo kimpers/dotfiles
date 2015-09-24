@@ -96,23 +96,26 @@ mdless(){
 pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less;
 }
 
-# Alias naut to open
-alias open='nautilus'
-
-export NVM_DIR="/home/kikko/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 alias rm='echo "rm is disabled, use tr or /bin/rm instead."'
 # Shorthand for trash
 alias tr=trash
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
-# Chef-dk
-export PATH="/opt/chefdk/bin:$PATH"
+# Platform specific commands
+case `uname` in (Linux)
+  alias open=xdg-open
+  # Chef-dk
+  export PATH="/opt/chefdk/bin:$PATH"
 
-# Add amzon ssh key
-ssh-add ~/.ssh/ec2.pem > /dev/null 2>&1
+  ### Added by the Heroku Toolbelt
+  export PATH="/usr/local/heroku/bin:$PATH"
+
+  export NVM_DIR="/home/kikko/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+  ;;
+(Darwin)
+  ;;
+esac
+
