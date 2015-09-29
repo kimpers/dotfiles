@@ -80,11 +80,6 @@ export PATH="/home/kikko/scripts:/home/kikko/.rbenv/plugins/ruby-build/bin:/home
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
-# Vim settings
-export VISUAL=vim
-export EDITOR=vim
-alias vi="/usr/local/bin/vim"
-
 # Other
 export PATH="$HOME/scripts:$PATH"
 export LC_ALL=en_US.UTF-8
@@ -102,6 +97,7 @@ alias tr=trash
 
 # Platform specific commands
 case `uname` in (Linux)
+  alias vi="/usr/local/bin/vim"
   alias open=xdg-open
   # Chef-dk
   export PATH="/opt/chefdk/bin:$PATH"
@@ -116,6 +112,13 @@ case `uname` in (Linux)
   eval "$(rbenv init -)"
   ;;
 (Darwin)
+  export NVM_DIR=~/.nvm
+  source $(brew --prefix nvm)/nvm.sh
+  alias vim="mvim -v"
+  alias vi="mvim -v"
   ;;
 esac
 
+# Vim settings
+export VISUAL=vim
+export EDITOR=vim
