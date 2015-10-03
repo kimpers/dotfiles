@@ -223,7 +223,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Text and latex specific settings
-au FileType text,tex setlocal wrap linebreak nolist spell spelllang=en_us
+au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
 " Latex specific settings
 " Fix to make large Latex files not be slow in Vim
 "autocmd FileType tex :NoMatchParen

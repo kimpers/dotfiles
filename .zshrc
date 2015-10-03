@@ -51,18 +51,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/home/kikko/scripts:/home/kikko/.rbenv/plugins/ruby-build/bin:/home/kikko/.rbenv/shims:/home/kikko/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,21 +96,35 @@ case `uname` in (Linux)
 
   ### Added by the Heroku Toolbelt
   export PATH="/usr/local/heroku/bin:$PATH"
-
+  # NVM
   export NVM_DIR="/home/kikko/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
+  # RBenv
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+  export PATH="/home/kikko/scripts:/home/kikko/.rbenv/plugins/ruby-build/bin:/home/kikko/.rbenv/shims:/home/kikko/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+  # Vim settings
+  export VISUAL=vim
+  export EDITOR=vim
   ;;
 (Darwin)
+  export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
   export NVM_DIR=~/.nvm
   source $(brew --prefix nvm)/nvm.sh
   alias vim="mvim -v"
   alias vi="mvim -v"
+  source ~/.bin/tmuxinator.zsh
+  # Preferred editor for local and remote sessions
+    if [[ -n $SSH_CONNECTION ]]; then
+      export EDITOR='vim'
+      export VISUAL='vim'
+    else
+      export EDITOR='mvim -v'
+      export VISUAL='mvim -v'
+    fi
+    # Leovegas shortcut commands
+    leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run dev }
+    api () {  curl http://localhost:8000/$1 | python -m json.tool }
+
   ;;
 esac
-
-# Vim settings
-export VISUAL=vim
-export EDITOR=vim
