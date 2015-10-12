@@ -28,6 +28,8 @@ function install {
   # Git
   ln -sf "$dotfiles_dir/other/.gitconfig" ~/.gitconfig
 
+  # Atom
+  ln -sf "$dotfiles_dir/.atom" ~/.atom
   echo "Installation completed. Enjoy!"
 }
 

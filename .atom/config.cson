@@ -1,0 +1,27 @@
+"*":
+  "autocomplete-plus":
+    confirmCompletion: "enter"
+    useCoreMovementCommands: false
+  "exception-reporting":
+    userId: "1e1cc154-1260-5a70-812e-2ea54c7084f5"
+  welcome:
+    showOnStartup: false
+  core: {}
+  editor:
+    invisibles: {}
+    showIndentGuide: true
+  "save-session":
+    dataSaveFolder: "/Users/kim/.atom/packages/save-session/projects"
+  "atom-ternjs": {}
+  "linter-jshint": {}
+  linter:
+    showErrorPanel: false
+  whitespace:
+    removeTrailingWhitespace: false
+    ensureSingleTrailingNewline: false
+  "vim-mode": {}
+  docblockr: {}
+"node-debugger":
+  nodePath: "/Users/kim/.nvm/versions/node/v0.12.7/bin/node"
+  appArgs: ""
+  debugPort: 5860

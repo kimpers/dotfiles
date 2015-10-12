@@ -55,7 +55,6 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
-Plug 'shutnik/jshint2.vim', {'for': 'javascript'}
 
 " Other
 Plug 'digitaltoad/vim-jade', {'for': 'jade'}
@@ -173,6 +172,16 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
 autocmd FileType php,java
 	\if &completefunc != '' | let &omnifunc=&completefunc | endif
+
+" Syntastic
+"let statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Unite.vim
 " Content search
