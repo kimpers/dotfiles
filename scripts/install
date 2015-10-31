@@ -25,14 +25,11 @@ function install {
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.vimrc
   ln -sf "$dotfiles_dir/.vim" ~/.vim
 
-  # Redshift
-  ln -sf "$dotfiles_dir/other/redshift.conf" ~/.config/redshift.conf
-
   # Git
   ln -sf "$dotfiles_dir/other/.gitconfig" ~/.gitconfig
 
-  source ~/.bash_profile
-
+  # Atom
+  ln -sf "$dotfiles_dir/.atom" ~/.atom
   echo "Installation completed. Enjoy!"
 }
 

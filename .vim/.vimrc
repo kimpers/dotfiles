@@ -25,7 +25,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
@@ -38,6 +37,9 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
 Plug 'dyng/ctrlsf.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-sensible'
+"Plug 'sheerun/vim-polyglot', { 'do': './build' }
 "Plug 'benmills/vimux'
 "Plug 'tpope/vim-dispatch'
 "Plug 'jonathanfilip/vim-lucius'
@@ -54,7 +56,6 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
-Plug 'shutnik/jshint2.vim', {'for': 'javascript'}
 
 " Other
 Plug 'digitaltoad/vim-jade', {'for': 'jade'}
@@ -159,6 +160,16 @@ autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
 autocmd FileType php,java
 	\if &completefunc != '' | let &omnifunc=&completefunc | endif
 
+" Syntastic
+"let statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Unite.vim
 " Content search
 nnoremap <leader>/ :Unite grep:.<cr>
@@ -211,7 +222,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Text and latex specific settings
-au FileType text,tex setlocal wrap linebreak nolist spell spelllang=en_us
+au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
 " Latex specific settings
 " Fix to make large Latex files not be slow in Vim
 "autocmd FileType tex :NoMatchParen
