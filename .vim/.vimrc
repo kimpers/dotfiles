@@ -34,10 +34,11 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-repeat'
-Plug 'benmills/vimux'
 Plug 'qpkorr/vim-bufkill'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
+Plug 'dyng/ctrlsf.vim'
+"Plug 'benmills/vimux'
 "Plug 'tpope/vim-dispatch'
 "Plug 'jonathanfilip/vim-lucius'
 "Plug 'jpo/vim-railscasts-theme'
@@ -64,7 +65,7 @@ call plug#end()
 " ------------------------------------------------------------------------
 filetype plugin indent on
 
-" Change the leader from \ to ,
+" Change the leader from \ to <Space>
 let mapleader="\<Space>"
 
 runtime macros/matchit.vim
@@ -129,12 +130,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Toggle paste mode on F2
 set pastetoggle=<F2>
 
-" Toggle fullscreen and tool/menu bars (requires vim-qt)
-nnoremap <C-F9> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
-nnoremap <C-F10> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
-nnoremap <C-F11> :set fullscreen<CR>
-nnoremap <C-F12> :set nofullscreen<CR>
-
 " Put : command on ; for easer access
 nnoremap ; :
 
@@ -143,14 +138,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Unbind arrow keys to force use of hjkl
-" Unbind the cursor keys in insert, normal and visual modes.
-for prefix in ['i', 'n', 'v']
-  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-    exe prefix . "noremap " . key . " <Nop>"
-  endfor
-endfor
 
 " Toggle text folding easily with F9
 inoremap <F9> <C-O>za
@@ -176,8 +163,11 @@ autocmd FileType php,java
 " Content search
 nnoremap <leader>/ :Unite grep:.<cr>
 
-" File selection
-nnoremap <C-p> :Unite file_rec/async<cr>
+" File selection fuzzy search in both buffers and files
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+nnoremap <leader>p :Unite -start-insert file_rec/async<cr>
 
 " Yank history
 let g:unite_source_history_yank_enable = 1
@@ -232,25 +222,6 @@ au FileType tex setlocal nocursorcolumn
 au FileType tex setlocal norelativenumber
 "au FileType tex setlocal synmaxcol=200
 
-" Vimux
-" Run the current file with rspec
-map <Leader>rb :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
-" Run all specs
-map <Leader>ra :call VimuxRunCommand("clear; bundle exec rspec")<CR>
-" Promt for a command to run
-map <Leader>rp :VimuxPromptCommand<CR>
-" Inspect runner pane
-map <Leader>ri :VimuxInspectRunner<CR>
-" Run last vimux command
-map <Leader>rl :VimuxRunLastCommand<CR>
-" Close vim tmux runner opened by vimux
-map <Leader>rq :VimuxCloseRunner<CR>
-" Interrupt any command running in the runner pane
-map <Leader>rs :VimuxInterruptRunner<CR>
-" Split tmuxpane horizontally
-let g:VimuxOrientation = "h"
-
-
 " Powerline
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 " Always show statusline
@@ -275,15 +246,16 @@ nmap <silent> <S-L>  <Plug>GoldenViewSplit
 " and toggle back
 nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
 nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
+
 " 3. jump to next and previous window
 nmap <silent> <S-N>  <Plug>GoldenViewNext
 nmap <silent> <S-P>  <Plug>GoldenViewPrevious
 
 " Easy-align
-" Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
-" Start interactive EasyAlign with a Vim movement
-nmap <Leader>a <Plug>(EasyAlign)
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Vim-surround
 " ERB tags
