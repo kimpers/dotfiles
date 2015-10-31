@@ -87,6 +87,9 @@ alias rm='echo "rm is disabled, use tr or /bin/rm instead."'
 # Shorthand for trash
 alias tr=trash
 
+# 256 colors tmux
+export TERM=xterm-256color
+
 # Platform specific commands
 case `uname` in (Linux)
   alias vi="/usr/local/bin/vim"

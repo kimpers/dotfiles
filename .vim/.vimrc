@@ -26,9 +26,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -39,6 +37,8 @@ Plug 'Shougo/unite.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-unimpaired'
+"Plug 'terryma/vim-expand-region'
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
 "Plug 'benmills/vimux'
 "Plug 'tpope/vim-dispatch'
@@ -54,12 +54,14 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
 Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'othree/yajs.vim', {'for': 'javascript'}
+"Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
+Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 
 " Other
 Plug 'digitaltoad/vim-jade', {'for': 'jade'}
 Plug 'JulesWang/css.vim', {'for': 'css'}
+Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 
 call plug#end()
@@ -149,16 +151,12 @@ vnoremap <F9> zf
 " Plugins --------------------------------------------------------------------------------------
 
 " Omni complete functions
-autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-" Eclim should only autocomplete some files
-autocmd FileType php,java, let g:EclimCompletionMethod = 'omnifunc'
-autocmd FileType php,java
-	\if &completefunc != '' | let &omnifunc=&completefunc | endif
+"autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Syntastic
 "let statusline+=%#warningmsg#
@@ -168,7 +166,7 @@ autocmd FileType php,java
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 " Unite.vim
 " Content search
@@ -185,7 +183,7 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :Unite history/yank<cr>
 
 "Buffer switching
-nnoremap <leader>s :Unite -quick-match buffer<cr>
+nnoremap <leader>b :Unite -quick-match buffer<cr>
 
 " Ultisnips selection on ctrl-j to stop interference
 " with YouCompleteMe
