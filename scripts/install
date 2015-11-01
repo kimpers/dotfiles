@@ -30,6 +30,10 @@ function install {
 
   # Atom
   ln -sf "$dotfiles_dir/.atom" ~/.atom
+
+  # Spacemacs
+  ln -sf "$dotfiles_dir/.spacemacs" ~/.spacemacs
+  ln -sf "$dotfiles_dir/spacemacs/private" ~/.emacs.d/private
   echo "Installation completed. Enjoy!"
 }
 
