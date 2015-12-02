@@ -5,3 +5,6 @@ plugged
 !.keep
 .vim
 spell
+init.vim
+shada
+tmp

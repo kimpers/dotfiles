@@ -33,7 +33,7 @@ function install {
 
   # Spacemacs
   ln -sf "$dotfiles_dir/.spacemacs" ~/.spacemacs
-  ln -sf "$dotfiles_dir/spacemacs/private" ~/.emacs.d/private
+  ln -s "$dotfiles_dir/spacemacs/private" ~/.emacs.d
   echo "Installation completed. Enjoy!"
 }
 

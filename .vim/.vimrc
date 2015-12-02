@@ -18,7 +18,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'sickill/vim-pasta'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
@@ -28,7 +27,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'zhaocai/GoldenView.Vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-repeat'
 Plug 'qpkorr/vim-bufkill'
@@ -36,7 +34,12 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-sensible'
+Plug 'jzelinskie/vim-sensible' " Use NeoVim compatible fork
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'benekastah/neomake'
+Plug 'bling/vim-airline'
+"Plug 'zhaocai/GoldenView.Vim'
+"Plug 'tpope/vim-sensible'
 "Plug 'tpope/vim-unimpaired'
 "Plug 'terryma/vim-expand-region'
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
@@ -62,7 +65,6 @@ Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 Plug 'digitaltoad/vim-jade', {'for': 'jade'}
 Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
-Plug 'lervag/vimtex', {'for': 'tex'}
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -75,18 +77,30 @@ runtime macros/matchit.vim
 
 " Settings ----------------------------------------------------------------------------------
 
+  "NeoVim handles ESC keys as alt+key, set this to solve the problem
+  set timeout
+  set timeoutlen=750
+  set ttimeoutlen=250
+  if has('nvim')
+     set ttimeout
+     set ttimeoutlen=0
+  endif
 " Set hybrid relative and absolute line numbers
 set number
 set relativenumber
 
 " 2 spaces TABS as standard and 4 for some files
-set tabstop=2       " The width of a TAB is set to 4.
-set shiftwidth=2    " Indents will have a width of 4
+set tabstop=2       " The width of a TAB is set to 2.
+set shiftwidth=2    " Indents will have a width of 2
 set softtabstop=2   " Sets the number of columns for a TAB
 autocmd FileType java set tabstop=4
 autocmd FileType java set shiftwidth=4
 autocmd FileType java set softtabstop=4
 set expandtab
+autocmd FileType javascript set tabstop=4
+autocmd FileType javascript set shiftwidth=4
+autocmd FileType javascript set softtabstop=4
+autocmd FileType javascript set noexpandtab
 
 " General settings
 set hidden
@@ -121,7 +135,7 @@ nnoremap <C-F6> :GundoToggle<CR>
 " Ctrl F7 to toggle Nerdtree
 nnoremap <C-F7> :NERDTreeToggle<CR>
 
-" Map esc to j+k no matter order so both can be pressed at the same time
+" Map esc to jj/j+k no matter order so both can be pressed at the same time
 :imap jj <Esc>
 :imap jk <Esc>
 :imap kj <Esc>
@@ -136,11 +150,17 @@ set pastetoggle=<F2>
 " Put : command on ; for easer access
 nnoremap ; :
 
-" Better window navigation with ctrl-hjkl
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" Make esc change modes in terminal
+:tnoremap <leader><Esc> <C-\><C-n>
+" Better window navigation with ctrl-w-hjkl
+:tnoremap <C-w>h <C-\><C-n><C-w>h
+:tnoremap <C-w>j <C-\><C-n><C-w>j
+:tnoremap <C-w>k <C-\><C-n><C-w>k
+:tnoremap <C-w>l <C-\><C-n><C-w>l
+:nnoremap <C-w>h <C-w>h
+:nnoremap <C-w>j <C-w>j
+:nnoremap <C-w>k <C-w>k
+:nnoremap <C-w>l <C-w>l
 
 " Toggle text folding easily with F9
 inoremap <F9> <C-O>za
@@ -158,25 +178,28 @@ vnoremap <F9> zf
 "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
-" Syntastic
-"let statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" Neomake
+autocmd! BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['jshint']
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+
+" Smarter search
+" / in visual seaches for selection
+vnoremap / y/<C-R>"<CR>
+" leader / brings up CTrlSFPrompt
+nmap <leader>/  <Plug>CtrlSFPrompt
+" leader / in visual searches for files containing selection
+vmap <leader>/ <Plug>CtrlSFVwordExec
+
+" FZF
+set rtp+=~/.fzf
+nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
 
 " Unite.vim
-" Content search
-nnoremap <leader>/ :Unite grep:.<cr>
-
-" File selection fuzzy search in both buffers and files
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
-nnoremap <leader>p :Unite -start-insert file_rec/async<cr>
 
 " Yank history
 let g:unite_source_history_yank_enable = 1
@@ -221,18 +244,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Text and latex specific settings
 au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
-" Latex specific settings
-" Fix to make large Latex files not be slow in Vim
-"autocmd FileType tex :NoMatchParen
-" autocmd FileType tex :syntax sync minlines=256
-" autocmd FileType tex :syntax sync maxlines=500
-au FileType tex setlocal nocursorline
-au FileType tex setlocal nocursorcolumn
-au FileType tex setlocal norelativenumber
-"au FileType tex setlocal synmaxcol=200
 
-" Powerline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 " Always show statusline
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
@@ -246,19 +258,6 @@ autocmd vimenter * DoMatchParen
 
 " IndentGuides
 au VimEnter * IndentGuidesEnable
-
-" GoldenView
-let g:goldenview__enable_default_mapping = 0
-" 1. split to tiled windows
-nmap <silent> <S-L>  <Plug>GoldenViewSplit
-" 2. quickly switch current window with the main pane
-" and toggle back
-nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
-nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
-
-" 3. jump to next and previous window
-nmap <silent> <S-N>  <Plug>GoldenViewNext
-nmap <silent> <S-P>  <Plug>GoldenViewPrevious
 
 " Easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -274,11 +273,9 @@ autocmd FileType eruby let g:surround_33 = "```\r```"
 
 " ALT key bindings in terminal mode workaround to get terminal vim 
 " to pick up on M-key bindings
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set timeout ttimeoutlen=50
-
+"let c='a'
+"while c <= 'z'
+  "exec "set <A-".c.">=\e".c
+  "exec "imap \e".c." <A-".c.">"
+  "let c = nr2char(1+char2nr(c))
+"endw

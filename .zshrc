@@ -90,6 +90,34 @@ alias tr=trash
 # 256 colors tmux
 export TERM=xterm-256color
 
+# Custom VI mode in terminal
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+#function zle-line-init zle-keymap-select {
+    #VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    #RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    #zle reset-prompt
+#}
+
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+export KEYTIMEOUT=1
+
+mount-home () {
+  sshfs kim@h.kimpers.com:/media/kim ~/mnt/home -o defer_permissions
+}
+
+umount-home () {
+  umount ~/mnt/home
+}
+
 # Platform specific commands
 case `uname` in (Linux)
   alias vi="/usr/local/bin/vim"
@@ -111,23 +139,26 @@ case `uname` in (Linux)
   export EDITOR=vim
   ;;
 (Darwin)
+  alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
   export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
   export NVM_DIR=~/.nvm
   source $(brew --prefix nvm)/nvm.sh
-  alias vim="mvim -v"
-  alias vi="mvim -v"
+  alias vim=nvim
+  alias vi=nvim
   source ~/.bin/tmuxinator.zsh
   # Preferred editor for local and remote sessions
-    if [[ -n $SSH_CONNECTION ]]; then
-      export EDITOR='vim'
-      export VISUAL='vim'
-    else
-      export EDITOR='mvim -v'
-      export VISUAL='mvim -v'
-    fi
-    # Leovegas shortcut commands
-    leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run dev }
-    api () {  curl http://localhost:8000/$1 | python -m json.tool }
+  if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+    export VISUAL='vim'
+  else
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+  fi
+  # Leovegas shortcut commands
+  leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run dev }
+  api () {  curl http://localhost:8000/$1 | python -m json.tool }
 
   ;;
 esac
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -8,3 +8,5 @@
 	br = branch
 	ci = commit
 	st = status
+[core]
+	excludesfile = /Users/kim/.gitignore

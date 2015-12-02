@@ -21,6 +21,8 @@
     ensureSingleTrailingNewline: false
   "vim-mode": {}
   docblockr: {}
+  "highlight-line":
+    enableBackgroundColor: false
 "node-debugger":
   nodePath: "/Users/kim/.nvm/versions/node/v0.12.7/bin/node"
   appArgs: ""
