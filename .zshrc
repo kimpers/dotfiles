@@ -157,6 +157,7 @@ case `uname` in (Linux)
   # Leovegas shortcut commands
   leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run dev }
   api () {  curl http://localhost:8000/$1 | python -m json.tool }
+  cordova-build-local () { TARGET=local cordova build $1 }
 
   ;;
 esac

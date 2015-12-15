@@ -2,7 +2,7 @@
 	email = kimpers@users.noreply.github.com
 	name = Kim Persson
 [push]
-	default = simple
+	default = current
 [alias]
 	co = checkout
 	br = branch

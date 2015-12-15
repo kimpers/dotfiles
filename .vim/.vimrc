@@ -89,19 +89,6 @@ runtime macros/matchit.vim
 set number
 set relativenumber
 
-" 2 spaces TABS as standard and 4 for some files
-set tabstop=2       " The width of a TAB is set to 2.
-set shiftwidth=2    " Indents will have a width of 2
-set softtabstop=2   " Sets the number of columns for a TAB
-autocmd FileType java set tabstop=4
-autocmd FileType java set shiftwidth=4
-autocmd FileType java set softtabstop=4
-set expandtab
-autocmd FileType javascript set tabstop=4
-autocmd FileType javascript set shiftwidth=4
-autocmd FileType javascript set softtabstop=4
-autocmd FileType javascript set noexpandtab
-
 " General settings
 set hidden
 set nobackup
@@ -126,6 +113,7 @@ set incsearch     " show search matches as you type
 
 set splitbelow    " spawn horizontal splits below instead of above"
 set splitright    " spawn vertical splits to the right instead of left"
+set colorcolumn=80 "Show vertical line at 80 chars"
 
 " Keymappings --------------------------------------------------------------------------------
 
