@@ -45,7 +45,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,7 +83,6 @@ mdless(){
 pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less;
 }
 
-alias rm='echo "rm is disabled, use tr or /bin/rm instead."'
 # Shorthand for trash
 alias tr=trash
 
@@ -117,7 +116,6 @@ mount-home () {
 umount-home () {
   umount ~/mnt/home
 }
-
 # Platform specific commands
 case `uname` in (Linux)
   alias vi="/usr/local/bin/vim"
@@ -139,12 +137,21 @@ case `uname` in (Linux)
   export EDITOR=vim
   ;;
 (Darwin)
+  # Golang
+  export GOPATH=$HOME/golang
+  export GOROOT=/usr/local/opt/go/libexec
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOROOT/bin
   alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+  alias mongo="mongod --config /usr/local/etc/mongod.conf"
+  alias copy-branch="git rev-parse --abbrev-ref HEAD | pbcopy"
+  alias lck="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
   export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
   export NVM_DIR=~/.nvm
   source $(brew --prefix nvm)/nvm.sh
   alias vim=nvim
   alias vi=nvim
+  alias o=open
   source ~/.bin/tmuxinator.zsh
   # Preferred editor for local and remote sessions
   if [[ -n $SSH_CONNECTION ]]; then
@@ -155,11 +162,14 @@ case `uname` in (Linux)
     export VISUAL='nvim'
   fi
   # Leovegas shortcut commands
-  leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run dev }
+  leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run start }
   api () {  curl http://localhost:8000/$1 | python -m json.tool }
+  work () { (cd apps/$1 && grunt work) }
   cordova-build-local () { TARGET=local cordova build $1 }
-
   ;;
 esac
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
