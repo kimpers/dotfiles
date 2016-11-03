@@ -1,5 +1,4 @@
-# Your keymap
-#
+# Your keymap #
 # Atom keymaps work similarly to style sheets. Just as style sheets use
 # selectors to apply styles to elements, Atom keymaps use selectors to associate
 # keystrokes with events in specific contexts. Unlike style sheets however,
@@ -26,16 +25,6 @@
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 
-'atom-text-editor':
-  'ctrl-h': 'window:focus-pane-on-left'
-  'ctrl-j': 'window:focus-pane-below'
-  'ctrl-k': 'window:focus-pane-above'
-  'ctrl-l': 'window:focus-pane-on-right'
-
-'body atom-text-editor.autocomplete-active':
-  'shift-tab': 'autocomplete-plus:move-up'
-  'tab': 'autocomplete-plus:move-down'
-  'pageup': 'autocomplete-plus:page-up'
-  'pagedown': 'autocomplete-plus:page-down'
-  'home': 'autocomplete-plus:move-to-top'
-  'end': 'autocomplete-plus:move-to-bottom'
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  ';': 'ex-mode:open'
+  ':': 'ex-mode:open'
