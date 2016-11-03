@@ -9,10 +9,12 @@ call plug#begin('~/.vim/plugged')
 " Plugs to install
 " General
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-Plug 'altercation/vim-colors-solarized'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'sickill/vim-pasta'
@@ -21,25 +23,50 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
-Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-repeat'
 Plug 'qpkorr/vim-bufkill'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
-Plug 'dyng/ctrlsf.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jzelinskie/vim-sensible' " Use NeoVim compatible fork
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'benekastah/neomake'
+Plug 'benjie/neomake-local-eslint.vim'
 Plug 'bling/vim-airline'
+Plug 'rking/ag.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'mhinz/vim-startify'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+Plug 'tpope/vim-endwise', {'for': 'ruby'}
+Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+
+" Javascript
+Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'flowtype/vim-flow', {'for': 'javascript', 'do': 'npm install -g flow-bin'}
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+" Golang
+Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'zchee/deoplete-go', {'for': 'go', 'do': 'make'}
+
+" Other
+Plug 'JulesWang/css.vim', {'for': 'css'}
+Plug 'ap/vim-css-color', {'for': 'css'}
+
+" Not needed?
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+"Plug 'junegunn/vim-easy-align'
+"Plug 'christoomey/vim-tmux-navigator'
+"Plug 'tpope/vim-repeat'
+"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "Plug 'zhaocai/GoldenView.Vim'
-"Plug 'tpope/vim-sensible'
 "Plug 'tpope/vim-unimpaired'
 "Plug 'terryma/vim-expand-region'
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
@@ -48,23 +75,10 @@ Plug 'bling/vim-airline'
 "Plug 'jonathanfilip/vim-lucius'
 "Plug 'jpo/vim-railscasts-theme'
 "Plug 'szw/vim-ctrlspace'
-
-" Ruby
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-Plug 'tpope/vim-endwise', {'for': 'ruby'}
-Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-
-" Javascript
-Plug 'moll/vim-node', {'for': 'javascript'}
+"Plug 'digitaltoad/vim-jade', {'for': 'jade'}
+"Plug 'moll/vim-node', {'for': 'javascript'}
 "Plug 'othree/yajs.vim', {'for': 'javascript'}
-Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
-Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
-
-" Other
-Plug 'digitaltoad/vim-jade', {'for': 'jade'}
-Plug 'JulesWang/css.vim', {'for': 'css'}
-Plug 'ap/vim-css-color', {'for': 'css'}
+"Plug 'tpope/vim-rails', {'for': 'ruby'}
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -75,7 +89,24 @@ let mapleader="\<Space>"
 
 runtime macros/matchit.vim
 
+" Custom commands ---------------------------------------------------------
+" Beautify JSON
+function! JsonFmt()
+  %!python -m json.tool
+  %s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
+endfunction
+
+command! JsonFmt :call JsonFmt()
+
 " Settings ----------------------------------------------------------------------------------
+" Disable equal always to avoid resizing splits automatically
+set noea
+
+"  True colors
+set termguicolors
+
+" JsDoc
+nmap <silent> <leader>jd <Plug>(jsdoc)
 
   "NeoVim handles ESC keys as alt+key, set this to solve the problem
   set timeout
@@ -141,14 +172,20 @@ nnoremap ; :
 " Make esc change modes in terminal
 :tnoremap <leader><Esc> <C-\><C-n>
 " Better window navigation with ctrl-w-hjkl
-:tnoremap <C-w>h <C-\><C-n><C-w>h
-:tnoremap <C-w>j <C-\><C-n><C-w>j
-:tnoremap <C-w>k <C-\><C-n><C-w>k
-:tnoremap <C-w>l <C-\><C-n><C-w>l
-:nnoremap <C-w>h <C-w>h
-:nnoremap <C-w>j <C-w>j
-:nnoremap <C-w>k <C-w>k
-:nnoremap <C-w>l <C-w>l
+":tnoremap <C-w>h <C-\><C-n><C-w>h
+":tnoremap <C-w>j <C-\><C-n><C-w>j
+":tnoremap <C-w>k <C-\><C-n><C-w>k
+":tnoremap <C-w>l <C-\><C-n><C-w>l
+tnoremap <silent><C-W>j <C-W><C-J><CR>
+tnoremap <silent><C-W>k <C-W><C-K><CR>
+tnoremap <silent><C-W>l <C-W><C-L><CR>
+tnoremap <silent><C-W>h <C-W><C-H><CR>
+
+" move between splits without the ctrl-w prefix
+nnoremap <silent><C-W>j <C-W><C-J><CR>
+nnoremap <silent><C-W>k <C-W><C-K><CR>
+nnoremap <silent><C-W>l <C-W><C-L><CR>
+nnoremap <silent><C-W>h <C-W><C-H><CR>
 
 " Toggle text folding easily with F9
 inoremap <F9> <C-O>za
@@ -166,9 +203,60 @@ vnoremap <F9> zf
 "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
+" Enable deoplete
+let g:deoplete#enable_at_startup = 1
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+" Use tern_for_vim.
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+autocmd BufEnter * set completeopt-=preview " Turn off autocomplete info buffer
+
+" deoplete + neosnippet + autopairs
+let g:AutoPairsMapCR=0
+let g:deoplete#enable_smart_case = 1
+imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.dotfiles/.vim/plugged/vim-snippets/snippets'
+
+" Use markdown syntac for .md
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" JSX
+" Allow JSX syntax high lighting only in JSX files
+let g:jsx_ext_required = 1
+
 " Neomake
-autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['jshint']
+" Autoreload changed files for eslint fix on file save
+set autoread
+autocmd BufEnter,FocusGained * checktime
+
+let g:neomake_list_height = 2
+let g:neomake_open_list = 2
+let g:neomake_verbose = 3
+let g:neomake_javascript_eslint_exe = './node_modules/.bin/eslint'
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_maker = {
+    \ 'args': ['--fix', '--no-color', '--format', 'compact'],
+    \ 'errorformat': '%f: line %l\, col %c\, %m'
+    \ }
+autocmd! BufWritePost *.js silent! Neomake
+autocmd! BufWritePost *.go silent! Neomake
+autocmd! BufWritePost *.go silent! GoTest
+
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_list_type = "quickfix"
+let g:go_fmt_fail_silently = 1 " Let neomake show errors instead
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
 
 " vim-airline
 let g:airline_powerline_fonts = 1
@@ -178,14 +266,16 @@ let g:airline#extensions#tabline#enabled = 1
 " Smarter search
 " / in visual seaches for selection
 vnoremap / y/<C-R>"<CR>
-" leader / brings up CTrlSFPrompt
-nmap <leader>/  <Plug>CtrlSFPrompt
-" leader / in visual searches for files containing selection
-vmap <leader>/ <Plug>CtrlSFVwordExec
+"" leader / brings up CTrlSFPrompt
+"nmap <leader>/  <Plug>CtrlSFPrompt
+"" leader / in visual searches for files containing selection
+"vmap <leader>/ <Plug>CtrlSFVwordExec
 
 " FZF
 set rtp+=~/.fzf
-nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+"nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+nnoremap <leader>t :FZF!<CR>
 
 " Unite.vim
 
@@ -201,12 +291,12 @@ nnoremap <leader>b :Unite -quick-match buffer<cr>
 let g:UltiSnipsExpandTrigger = '<c-j>'
 
 " YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_filetype_blacklist = {
-      \ 'tex' : 1,
-      \ 'markdown' : 1,
-      \ 'text' : 1
-      \}
+"let g:ycm_min_num_of_chars_for_completion = 3
+"let g:ycm_filetype_blacklist = {
+      "\ 'tex' : 1,
+      "\ 'markdown' : 1,
+      "\ 'text' : 1
+      "\}
 
 " Vim Jedi
 let g:jedi#popup_on_dot = 0
@@ -222,7 +312,7 @@ let g:gitgutter_eager = 0
 
 " Solarized theme
 set background=dark
-colorscheme solarized
+colorscheme NeoSolarized
 
 " Vim-ruby
 autocmd FileType ruby,eruby compiler ruby
