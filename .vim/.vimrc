@@ -14,7 +14,6 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
-"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'sickill/vim-pasta'
@@ -23,15 +22,13 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
-Plug 'matze/vim-move'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'qpkorr/vim-bufkill'
-Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'jzelinskie/vim-sensible' " Use NeoVim compatible fork
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'benekastah/neomake'
 Plug 'benjie/neomake-local-eslint.vim'
@@ -39,6 +36,7 @@ Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mhinz/vim-startify'
+Plug 'dyng/ctrlsf.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -51,6 +49,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow', {'for': 'javascript', 'do': 'npm install -g flow-bin'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
+
+" Typescript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/deoplete-typescript'
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
@@ -61,6 +64,8 @@ Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 
 " Not needed?
+" Plug 'matze/vim-move'
+"Plug 'SirVer/ultisnips'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 "Plug 'junegunn/vim-easy-align'
 "Plug 'christoomey/vim-tmux-navigator'
@@ -172,10 +177,6 @@ nnoremap ; :
 " Make esc change modes in terminal
 :tnoremap <leader><Esc> <C-\><C-n>
 " Better window navigation with ctrl-w-hjkl
-":tnoremap <C-w>h <C-\><C-n><C-w>h
-":tnoremap <C-w>j <C-\><C-n><C-w>j
-":tnoremap <C-w>k <C-\><C-n><C-w>k
-":tnoremap <C-w>l <C-\><C-n><C-w>l
 tnoremap <silent><C-W>j <C-W><C-J><CR>
 tnoremap <silent><C-W>k <C-W><C-K><CR>
 tnoremap <silent><C-W>l <C-W><C-L><CR>
@@ -195,14 +196,6 @@ vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
 
-" Omni complete functions
-"autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
@@ -211,6 +204,8 @@ let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 autocmd BufEnter * set completeopt-=preview " Turn off autocomplete info buffer
+" deoplete-typescript
+let g:deoplete#sources#tss#javascript_support = 1
 
 " deoplete + neosnippet + autopairs
 let g:AutoPairsMapCR=0
@@ -221,12 +216,12 @@ inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.dotfiles/.vim/plugged/vim-snippets/snippets'
 
-" Use markdown syntac for .md
+" Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " JSX
 " Allow JSX syntax high lighting only in JSX files
-let g:jsx_ext_required = 1
+let g:jsx_ext_required = 0
 
 " Neomake
 " Autoreload changed files for eslint fix on file save
@@ -266,37 +261,19 @@ let g:airline#extensions#tabline#enabled = 1
 " Smarter search
 " / in visual seaches for selection
 vnoremap / y/<C-R>"<CR>
-"" leader / brings up CTrlSFPrompt
-"nmap <leader>/  <Plug>CtrlSFPrompt
-"" leader / in visual searches for files containing selection
-"vmap <leader>/ <Plug>CtrlSFVwordExec
+" leader / brings up CTrlSFPrompt
+nmap <leader>/  <Plug>CtrlSFPrompt
+" leader / in visual searches for files containing selection
+vmap <leader>/ <Plug>CtrlSFVwordExec
 
 " FZF
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
-"nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
 nnoremap <leader>t :FZF!<CR>
 
-" Unite.vim
-
-" Yank history
-let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :Unite history/yank<cr>
-
+" Denite.nvim
 "Buffer switching
-nnoremap <leader>b :Unite -quick-match buffer<cr>
-
-" Ultisnips selection on ctrl-j to stop interference
-" with YouCompleteMe
-let g:UltiSnipsExpandTrigger = '<c-j>'
-
-" YouCompleteMe
-"let g:ycm_min_num_of_chars_for_completion = 3
-"let g:ycm_filetype_blacklist = {
-      "\ 'tex' : 1,
-      "\ 'markdown' : 1,
-      "\ 'text' : 1
-      "\}
+nnoremap <leader>b :Denite -quick-match buffer<cr>
 
 " Vim Jedi
 let g:jedi#popup_on_dot = 0
@@ -305,10 +282,6 @@ let g:jedi#popup_on_dot = 0
 " Performance optimization
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-
-" Lucius theme
-" colorscheme lucius
-" LuciusBlack
 
 " Solarized theme
 set background=dark
@@ -326,7 +299,7 @@ au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_
 " Always show statusline
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
+"set t_Co=256
 
 " Nerdtree autostart if vim is started without file argument
 "autocmd vimenter * if !argc() | NERDTree | endif
@@ -348,12 +321,3 @@ nmap ga <Plug>(EasyAlign)
 autocmd FileType eruby let g:surround_45 = "<% \r %>"
 autocmd FileType eruby let g:surround_61 = "<%= \r %>"
 autocmd FileType eruby let g:surround_33 = "```\r```"
-
-" ALT key bindings in terminal mode workaround to get terminal vim 
-" to pick up on M-key bindings
-"let c='a'
-"while c <= 'z'
-  "exec "set <A-".c.">=\e".c
-  "exec "imap \e".c." <A-".c.">"
-  "let c = nr2char(1+char2nr(c))
-"endw
