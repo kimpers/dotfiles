@@ -116,6 +116,7 @@ mount-home () {
 umount-home () {
   umount ~/mnt/home
 }
+
 # Platform specific commands
 case `uname` in (Linux)
   alias vi="/usr/local/bin/vim"
@@ -135,6 +136,7 @@ case `uname` in (Linux)
   # Vim settings
   export VISUAL=vim
   export EDITOR=vim
+
   ;;
 (Darwin)
   # Golang
@@ -166,10 +168,21 @@ case `uname` in (Linux)
   api () {  curl http://localhost:8000/$1 | python -m json.tool }
   work () { (cd apps/$1 && grunt work) }
   cordova-build-local () { TARGET=local cordova build $1 }
+
+  # Select the correct NVM version each time we change directories.
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    if [[ -f .nvmrc && -r .nvmrc ]]; then
+      nvm use
+    elif [[ $(nvm version) != $(nvm version default)  ]]; then
+      nvm use default
+    fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
   ;;
 esac
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
