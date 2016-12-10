@@ -20,7 +20,6 @@ Plug 'sickill/vim-pasta'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'terryma/vim-multiple-cursors'
@@ -37,6 +36,8 @@ Plug 'rking/ag.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mhinz/vim-startify'
 Plug 'dyng/ctrlsf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'cohama/lexima.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -44,16 +45,17 @@ Plug 'tpope/vim-endwise', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
-Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow', {'for': 'javascript', 'do': 'npm install -g flow-bin'}
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
+"Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
+"Plug 'mxw/vim-jsx'
+Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
+Plug 'thalesmello/deoplete-flow'
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/deoplete-typescript'
+"Plug 'mhartington/deoplete-typescript'
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
@@ -67,7 +69,6 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 " Plug 'matze/vim-move'
 "Plug 'SirVer/ultisnips'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-"Plug 'junegunn/vim-easy-align'
 "Plug 'christoomey/vim-tmux-navigator'
 "Plug 'tpope/vim-repeat'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -82,8 +83,9 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 "Plug 'szw/vim-ctrlspace'
 "Plug 'digitaltoad/vim-jade', {'for': 'jade'}
 "Plug 'moll/vim-node', {'for': 'javascript'}
-"Plug 'othree/yajs.vim', {'for': 'javascript'}
 "Plug 'tpope/vim-rails', {'for': 'ruby'}
+"Plug 'sheerun/vim-polyglot', { 'do': './build' }
+"Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -105,7 +107,9 @@ command! JsonFmt :call JsonFmt()
 
 " Settings ----------------------------------------------------------------------------------
 " Disable equal always to avoid resizing splits automatically
-set noea
+"set noea
+set equalalways
+
 
 "  True colors
 set termguicolors
@@ -195,11 +199,15 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" Fugitive
+" Split vertically
+set diffopt+=vertical
 
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+let g:deoplete#file#enable_buffer_path = 1
 " Use tern_for_vim.
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
@@ -219,10 +227,6 @@ let g:neosnippet#snippets_directory='~/.dotfiles/.vim/plugged/vim-snippets/snipp
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" JSX
-" Allow JSX syntax high lighting only in JSX files
-let g:jsx_ext_required = 0
-
 " Neomake
 " Autoreload changed files for eslint fix on file save
 set autoread
@@ -230,16 +234,21 @@ autocmd BufEnter,FocusGained * checktime
 
 let g:neomake_list_height = 2
 let g:neomake_open_list = 2
-let g:neomake_verbose = 3
+let g:neomake_verbose = 0
 let g:neomake_javascript_eslint_exe = './node_modules/.bin/eslint'
-let g:neomake_javascript_enabled_makers = ['eslint']
+"let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_maker = {
     \ 'args': ['--fix', '--no-color', '--format', 'compact'],
     \ 'errorformat': '%f: line %l\, col %c\, %m'
     \ }
-autocmd! BufWritePost *.js silent! Neomake
-autocmd! BufWritePost *.go silent! Neomake
-autocmd! BufWritePost *.go silent! GoTest
+
+let g:flow#enable = 0
+let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
+let g:neomake_jsx_enabled_makers = ['flow', 'eslint']
+
+
+autocmd! BufWritePost * Neomake
+autocmd! BufWritePost *.go GoTest
 
 " vim-go
 let g:go_fmt_command = "goimports"
