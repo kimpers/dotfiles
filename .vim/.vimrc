@@ -38,11 +38,13 @@ Plug 'mhinz/vim-startify'
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'cohama/lexima.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+"Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
@@ -69,7 +71,6 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 " Plug 'matze/vim-move'
 "Plug 'SirVer/ultisnips'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-"Plug 'christoomey/vim-tmux-navigator'
 "Plug 'tpope/vim-repeat'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "Plug 'zhaocai/GoldenView.Vim'
@@ -180,17 +181,20 @@ nnoremap ; :
 
 " Make esc change modes in terminal
 :tnoremap <leader><Esc> <C-\><C-n>
-" Better window navigation with ctrl-w-hjkl
-tnoremap <silent><C-W>j <C-W><C-J><CR>
-tnoremap <silent><C-W>k <C-W><C-K><CR>
-tnoremap <silent><C-W>l <C-W><C-L><CR>
-tnoremap <silent><C-W>h <C-W><C-H><CR>
+let g:tmux_navigator_no_mappings = 1
+" Update changed buffer when switching to Tmux
+let g:tmux_navigator_save_on_switch = 1
 
-" move between splits without the ctrl-w prefix
-nnoremap <silent><C-W>j <C-W><C-J><CR>
-nnoremap <silent><C-W>k <C-W><C-K><CR>
-nnoremap <silent><C-W>l <C-W><C-L><CR>
-nnoremap <silent><C-W>h <C-W><C-H><CR>
+" Simpler split navigation in vim and tmux
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-p> :TmuxNavigatePrevious<cr>
+if has('nvim') " https://github.com/neovim/neovim/issues/2048
+  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+endif
+
 
 " Toggle text folding easily with F9
 inoremap <F9> <C-O>za
