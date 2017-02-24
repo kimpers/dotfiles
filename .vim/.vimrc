@@ -28,7 +28,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'qpkorr/vim-bufkill'
 Plug 'Shougo/denite.nvim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'benekastah/neomake'
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'bling/vim-airline'
@@ -87,6 +86,7 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 "Plug 'tpope/vim-rails', {'for': 'ruby'}
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
 "Plug 'jiangmiao/auto-pairs'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -185,6 +185,10 @@ let g:tmux_navigator_no_mappings = 1
 " Update changed buffer when switching to Tmux
 let g:tmux_navigator_save_on_switch = 1
 
+" Name tmux tabs after file open
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
+
+
 " Simpler split navigation in vim and tmux
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
@@ -281,6 +285,7 @@ vmap <leader>/ <Plug>CtrlSFVwordExec
 
 " FZF
 set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <leader>t :FZF!<CR>
 

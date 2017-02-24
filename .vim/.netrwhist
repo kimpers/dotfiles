@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/kim.persson/Development/leo-sports-client'
+let g:netrw_dirhist_2='/Users/kim.persson/Development/leo-sports-client/src'
+let g:netrw_dirhist_3='/Users/kim.persson/Development/leo-sports-client'
+let g:netrw_dirhist_4='/Users/kim.persson/Development'
+let g:netrw_dirhist_5='/Users/kim.persson/Development/leo-sports-client'
+let g:netrw_dirhist_6='/Users/kim.persson/Development/leo-sports-client/src'
