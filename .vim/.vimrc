@@ -10,11 +10,8 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
-Plug 'honza/vim-snippets'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'sickill/vim-pasta'
 Plug 'sjl/gundo.vim'
@@ -26,18 +23,18 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'qpkorr/vim-bufkill'
-Plug 'Shougo/denite.nvim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'benekastah/neomake'
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'mhinz/vim-startify'
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'cohama/lexima.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'bkad/CamelCaseMotion'
+Plug 'danro/rename.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -46,25 +43,28 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 "Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
-"Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 "Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin'}
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'thalesmello/deoplete-flow'
+Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
+Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
 " Typescript
-Plug 'HerringtonDarkholme/yats.vim'
-"Plug 'mhartington/deoplete-typescript'
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', {'do': 'npm install -g typescript',  'for': 'typescript' }
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'zchee/deoplete-go', {'for': 'go', 'do': 'make'}
 
+" Python
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
+Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 
 " Not needed?
 " Plug 'matze/vim-move'
@@ -87,6 +87,10 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'Shougo/neosnippet'
+"Plug 'Shougo/neosnippet-snippets'
+"Plug 'honza/vim-snippets'
+"Plug 'othree/yajs.vim'
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -106,6 +110,28 @@ endfunction
 
 command! JsonFmt :call JsonFmt()
 
+" Git add current buffer
+function! GitAddBuffer()
+  w
+  windo !git add %
+endfunction
+ 
+command! GitAddBuffer :call GitAddBuffer()
+
+" :E to create a new file inside new folder(s)
+function s:MKDir(...)
+    if         !a:0 
+           \|| isdirectory(a:1)
+           \|| filereadable(a:1)
+           \|| isdirectory(fnamemodify(a:1, ':p:h'))
+        return
+    endif
+    return mkdir(fnamemodify(a:1, ':p:h'), 'p')
+endfunction
+command -bang -bar -nargs=? -complete=file E :call s:MKDir(<f-args>) | e<bang> <args>
+
+command! RM :call delete(expand('%')) | bdelete!
+
 " Settings ----------------------------------------------------------------------------------
 " Disable equal always to avoid resizing splits automatically
 "set noea
@@ -114,6 +140,9 @@ set equalalways
 
 "  True colors
 set termguicolors
+
+" Enable spell check
+set spell
 
 " JsDoc
 nmap <silent> <leader>jd <Plug>(jsdoc)
@@ -207,6 +236,16 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+
+" CamelCaseMotion
+call camelcasemotion#CreateMotionMappings('<leader>')
+map <silent> <leader>w <Plug>CamelCaseMotion_w
+map <silent> <leader>b <Plug>CamelCaseMotion_b
+map <silent> <leader>e <Plug>CamelCaseMotion_e
+map <silent> <leader>ge <Plug>CamelCaseMotion_ge
 " Fugitive
 " Split vertically
 set diffopt+=vertical
@@ -223,14 +262,10 @@ autocmd BufEnter * set completeopt-=preview " Turn off autocomplete info buffer
 " deoplete-typescript
 let g:deoplete#sources#tss#javascript_support = 1
 
-" deoplete + neosnippet + autopairs
+" deoplete +  autopairs
 let g:AutoPairsMapCR=0
 let g:deoplete#enable_smart_case = 1
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.dotfiles/.vim/plugged/vim-snippets/snippets'
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -238,10 +273,10 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Neomake
 " Autoreload changed files for eslint fix on file save
 set autoread
-autocmd BufEnter,FocusGained * checktime
+autocmd BufEnter * checktime
 
-let g:neomake_list_height = 2
-let g:neomake_open_list = 2
+let g:neomake_list_height = 3
+let g:neomake_open_list = 3
 let g:neomake_verbose = 0
 let g:neomake_javascript_eslint_exe = './node_modules/.bin/eslint'
 "let g:neomake_javascript_enabled_makers = ['eslint']
@@ -251,9 +286,13 @@ let g:neomake_javascript_eslint_maker = {
     \ }
 
 let g:flow#enable = 0
-let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
-let g:neomake_jsx_enabled_makers = ['flow', 'eslint']
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 
+let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
+let g:neomake_typscript_tslint_exe = './node_modules/.bin/tslint'
+let g:neomake_typscript_tsc_exe = './node_modules/.bin/tsc'
+let g:neomake_typescript_tslint_args = ['--fix']
 
 autocmd! BufWritePost * Neomake
 autocmd! BufWritePost *.go GoTest
@@ -289,10 +328,6 @@ set rtp+=/usr/local/opt/fzf
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <leader>t :FZF!<CR>
 
-" Denite.nvim
-"Buffer switching
-nnoremap <leader>b :Denite -quick-match buffer<cr>
-
 " Vim Jedi
 let g:jedi#popup_on_dot = 0
 
@@ -320,7 +355,7 @@ set laststatus=2
 "set t_Co=256
 
 " Nerdtree autostart if vim is started without file argument
-"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " Highlight matching bracket/parantheses
 autocmd vimenter * DoMatchParen

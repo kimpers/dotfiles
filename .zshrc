@@ -1,90 +1,42 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Plugins
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+# This breaks bg/fg job management :(
+#zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'mafredri/zsh-async', from:github
+zplug 'sindresorhus/pure', use:pure.zsh, from:github, as:theme
+zplug 'zsh-users/zsh-autosuggestions', from:github
+zplug "plugins/git", from:oh-my-zsh
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+zplug load
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# History File
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt histignoredups   # Don't save lines if they're a duplicate of the previous line
+setopt histreduceblanks # Remove superfluous blanks from each command
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+# Aliases
+alias g=git
+alias ll="ls -al"
+alias copy-branch="git rev-parse --abbrev-ref HEAD | pbcopy"
+alias lck="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias vim=nvim
+alias vi=nvim
+alias o=open
+alias tr=trash
+alias ga=gfadd
+alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"
+alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
 
 # Other
 export PATH="$HOME/scripts:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-
-# View markdown files with less
-mdless(){
-pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less;
-}
-
-# Shorthand for trash
-alias tr=trash
 
 # 256 colors tmux
 export TERM=xterm-256color
@@ -99,89 +51,73 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
-#function zle-line-init zle-keymap-select {
-    #VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-    #RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
-    #zle reset-prompt
-#}
-
-#zle -N zle-line-init
-#zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
-mount-home () {
-  sshfs kim@h.kimpers.com:/media/kim ~/mnt/home -o defer_permissions
-}
-
-umount-home () {
-  umount ~/mnt/home
-}
-
 # Platform specific commands
-case `uname` in (Linux)
-  alias vi="/usr/local/bin/vim"
-  alias open=xdg-open
-  # Chef-dk
-  export PATH="/opt/chefdk/bin:$PATH"
+# Golang
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
-  ### Added by the Heroku Toolbelt
-  export PATH="/usr/local/heroku/bin:$PATH"
-  # NVM
-  export NVM_DIR="/home/kikko/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-  # RBenv
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-  export PATH="/home/kikko/scripts:/home/kikko/.rbenv/plugins/ruby-build/bin:/home/kikko/.rbenv/shims:/home/kikko/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-  # Vim settings
-  export VISUAL=vim
-  export EDITOR=vim
-
-  ;;
-(Darwin)
-  # Golang
-  export GOPATH=$HOME/golang
-  export GOROOT=/usr/local/opt/go/libexec
-  export PATH=$PATH:$GOPATH/bin
-  export PATH=$PATH:$GOROOT/bin
-  alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-  alias mongo="mongod --config /usr/local/etc/mongod.conf"
-  alias copy-branch="git rev-parse --abbrev-ref HEAD | pbcopy"
-  alias lck="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-  export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
-  export NVM_DIR=~/.nvm
-  source $(brew --prefix nvm)/nvm.sh
-  alias vim=nvim
-  alias vi=nvim
-  alias o=open
-  source ~/.bin/tmuxinator.zsh
-  # Preferred editor for local and remote sessions
-  if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-    export VISUAL='vim'
-  else
-    export EDITOR='nvim'
-    export VISUAL='nvim'
+source ~/.bin/tmuxinator.zsh
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+  export VISUAL='vim'
+else
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+fi
+# Leovegas shortcut commands
+i18n () { (cd apps/mobile && grunt i18n) && (cd apps/desktop && grunt i18n) }
+leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run start }
+api () {  curl http://localhost:8000/$1 | python -m json.tool }
+work () { (cd apps/$1 && grunt work) }
+cordova-build-local () { TARGET=local cordova build $1 }
+brew-cask-upgrade() {
+  if [ "$1" != '--quick' ]; then
+    echo "Removing brew cache"
+    rm -rf "$(brew --cache)"
+    echo "Running brew update"
+    brew update
   fi
-  # Leovegas shortcut commands
-  leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run start }
-  api () {  curl http://localhost:8000/$1 | python -m json.tool }
-  work () { (cd apps/$1 && grunt work) }
-  cordova-build-local () { TARGET=local cordova build $1 }
+  for c in $(brew cask list); do
+    echo -e "\n\nInstalled versions of $c: "
+    ls /opt/homebrew-cask/Caskroom/$c
+    echo "Cask info for $c"
+    brew cask info $c
+    select ynx in "Yes" "No" "Exit"; do
+      case $ynx in
+        "Yes") echo "Uninstalling $c"; brew cask uninstall --force "$c"; echo "Re-installing $c"; brew cask install "$c"; break;;
+        "No") echo "Skipping $c"; break;;
+        "Exit") echo "Exiting brew-cask-upgrade"; return;;
+      esac
+    done
+  done
+}
 
-  # Select the correct NVM version each time we change directories.
-  autoload -U add-zsh-hook
-  load-nvmrc() {
-    if [[ -f .nvmrc && -r .nvmrc ]]; then
-      nvm use
-    elif [[ $(nvm version) != $(nvm version default)  ]]; then
-      nvm use default
-    fi
-  }
-  add-zsh-hook chpwd load-nvmrc
-  load-nvmrc
-  ;;
-esac
+fuck-e2e () {
+  GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+  BRANCH=`basename $GIT_BRANCH`
+  GIT_TAG_PREPUSH="prepush-$BRANCH"
+
+  git fetch --tags && git tag -d ${GIT_TAG_PREPUSH} && git push origin :refs/tags/${GIT_TAG_PREPUSH} --no-verify
+  git tag ${GIT_TAG_PREPUSH} -m "auto tag from successful pre-push run"
+  git push origin ${GIT_TAG_PREPUSH} --no-verify || printf "\033[31mFailed to push git tag ${GIT_TAG_PREPUSH}\033[0m\n";
+}
+
+# FZF git add
+# fuzzy multi-select modified file
+#
+gfmod() {
+  git ls-files -m --others --exclude-standard | fzf -m
+}
+
+# stage files multi-selected modified files
+gfadd() {
+  git add $(gfmod)
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
