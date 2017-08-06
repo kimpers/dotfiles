@@ -35,6 +35,7 @@ Plug 'cohama/lexima.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'danro/rename.vim'
+Plug 'tpope/vim-rhubarb'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -183,7 +184,7 @@ set incsearch     " show search matches as you type
 
 set splitbelow    " spawn horizontal splits below instead of above"
 set splitright    " spawn vertical splits to the right instead of left"
-set colorcolumn=80 "Show vertical line at 80 chars"
+set colorcolumn=100 "Show vertical line at 100 chars"
 
 " Keymappings --------------------------------------------------------------------------------
 
@@ -236,6 +237,7 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
@@ -275,8 +277,8 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 set autoread
 autocmd BufEnter * checktime
 
-let g:neomake_list_height = 3
-let g:neomake_open_list = 3
+let g:neomake_list_height = 4
+let g:neomake_open_list = 4
 let g:neomake_verbose = 0
 let g:neomake_javascript_eslint_exe = './node_modules/.bin/eslint'
 "let g:neomake_javascript_enabled_makers = ['eslint']
