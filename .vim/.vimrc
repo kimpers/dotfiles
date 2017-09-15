@@ -185,6 +185,7 @@ set incsearch     " show search matches as you type
 set splitbelow    " spawn horizontal splits below instead of above"
 set splitright    " spawn vertical splits to the right instead of left"
 set colorcolumn=100 "Show vertical line at 100 chars"
+set noswapfile    " Turn off swap file
 
 " Keymappings --------------------------------------------------------------------------------
 
