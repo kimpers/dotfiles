@@ -32,6 +32,8 @@ alias ga=gfadd
 alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"
 alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
 alias ip="curl canihazip.com/s"
+alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 'Opportunity Backlog' AND issuetype != Epic ORDER BY Rank ASC\""
+alias python=python3
 
 # Other
 export PATH="$HOME/scripts:$PATH"

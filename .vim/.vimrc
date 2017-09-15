@@ -41,7 +41,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-"Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
+Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
@@ -53,7 +53,7 @@ Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', {'do': 'npm install -g typescript',  'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', {'do': ':UpdateRemotePlugins',  'for': 'typescript' }
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
