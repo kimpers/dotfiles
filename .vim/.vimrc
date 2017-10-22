@@ -19,7 +19,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'kana/vim-textobj-user'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'qpkorr/vim-bufkill'
@@ -47,9 +46,7 @@ Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 "Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
-Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
@@ -92,6 +89,10 @@ Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 "Plug 'Shougo/neosnippet-snippets'
 "Plug 'honza/vim-snippets'
 "Plug 'othree/yajs.vim'
+"https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
+"Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -288,9 +289,8 @@ let g:neomake_javascript_eslint_maker = {
     \ 'errorformat': '%f: line %l\, col %c\, %m'
     \ }
 
-let g:flow#enable = 0
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
 
 let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 let g:neomake_typscript_tslint_exe = './node_modules/.bin/tslint'
