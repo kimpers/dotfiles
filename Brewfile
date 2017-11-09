@@ -83,6 +83,7 @@ brew "libxml2"
 brew "links"
 brew "lynx"
 brew "macvim"
+brew "mas"
 brew "miniupnpc"
 brew "msgpack"
 brew "unibilium"
@@ -134,7 +135,11 @@ cask "ngrok"
 cask "pgadmin4"
 cask "qlmarkdown"
 cask "smcfancontrol"
-cask "sshfs"
 cask "vagrant"
 cask "vagrant-manager"
 cask "virtualbox"
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Spark", id: 1176895641
+mas "The Unarchiver", id: 425424353

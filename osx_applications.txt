@@ -1,0 +1,92 @@
+Amethyst.app
+Android File Transfer.app
+Android Studio.app
+App Store.app
+ArkClient.app
+Automator.app
+BetterTouchTool.app
+Brave.app
+Calculator.app
+Calendar.app
+Chess.app
+Chromium.app
+CleanMyMac 3.app
+Contacts.app
+Couchbase Server.app
+Cyberduck.app
+DVD Player.app
+Dashboard.app
+Dictionary.app
+Discord.app
+Docker
+Docker.app
+Ethereum Wallet.app
+FaceTime.app
+Firefox.app
+Font Book.app
+GPG Keychain.app
+Google Chrome.app
+Google Drive.app
+Google Drive.app.backup
+HyperSwitch.app
+IDLE 3.app
+IDLE.app
+Image Capture.app
+Karabiner-Elements.app
+Karabiner-EventViewer.app
+Keynote.app
+Launchpad.app
+Lisk Nano.app
+MacDown.app
+MacVim.app
+Mail.app
+Maps.app
+Messages.app
+Mission Control.app
+Neon.app
+Notes.app
+Numbers.app
+OmniDiskSweeper.app
+Pages.app
+Parsec.app
+Photo Booth.app
+Photos.app
+Postico.app
+Postman.app
+Preview.app
+Python Launcher 3.app
+Python Launcher.app
+Qtum-Qt.app
+QuickTime Player.app
+Reminders.app
+RemotePlay.app
+Remove Sophos Endpoint.app
+Safari.app
+Send to Kindle
+Siri.app
+Skype.app
+Slack.app
+Sophos Anti-Virus.app
+Spark.app
+Spectacle.app
+Spotify.app
+Steam.app
+Stickies.app
+System Preferences.app
+Telegram.app
+TextEdit.app
+The Unarchiver.app
+Time Machine.app
+Tower.app
+Utilities
+VLC.app
+Vagrant Manager.app
+VirtualBox.app
+Xcode.app
+calibre.app
+iBooks.app
+iTerm.app
+iTunes.app
+pgAdmin 4.app
+smcFanControl.app
+zoom.us.app

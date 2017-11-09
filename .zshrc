@@ -27,7 +27,6 @@ alias lck="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias vim=nvim
 alias vi=nvim
 alias o=open
-alias tr=trash
 alias ga=gfadd
 alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"
 alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
