@@ -35,6 +35,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'danro/rename.vim'
 Plug 'tpope/vim-rhubarb'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'metakirby5/codi.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -90,7 +92,6 @@ Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 "Plug 'honza/vim-snippets'
 "Plug 'othree/yajs.vim'
 "https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-"Plug 'terryma/vim-multiple-cursors'
 "Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
 "Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
@@ -239,6 +240,18 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+
+" vim-multiple-cursors
+" Disable deoplete while in multiple cursor mode due to incompatibilities
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  call deoplete#disable()
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  call deoplete#enable()
+endfunction
 
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
