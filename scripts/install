@@ -43,6 +43,9 @@ function install {
   # Powerline patched fonts
   ./fonts/install.sh
 
+  # Enable key repeat for OSX
+  defaults write -g ApplePressAndHoldEnabled -bool false
+
 
   echo "Installation completed. Enjoy!"
 }
