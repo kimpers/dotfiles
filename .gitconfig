@@ -1,6 +1,7 @@
 [user]
-	email = kimpers@users.noreply.github.com
+	email = kimpersson88@gmail.com
 	name = Kim Persson
+	signingkey = BEDF21BF
 [push]
 	default = current
 [alias]
@@ -17,3 +18,5 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+[commit]
+	gpgsign = true
