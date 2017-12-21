@@ -4,7 +4,7 @@ set nocompatible              " be iMproved, required
 syntax on
 
 "Setup
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugs to install
 " General

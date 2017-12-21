@@ -1,6 +1,7 @@
 # Plugins
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
+fpath+=("/usr/local/share/zsh/site-functions")
 
 # This breaks bg/fg job management :(
 #zplug 'zplug/zplug', hook-build:'zplug --self-manage'
@@ -35,7 +36,7 @@ alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 
 alias python=python3
 
 # Other
-export PATH="$HOME/scripts:$PATH"
+export PATH="$HOME/scripts:/usr/local/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8

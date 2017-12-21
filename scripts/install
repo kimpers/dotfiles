@@ -4,19 +4,13 @@ echo "Installing dotfiles..."
 echo
 dotfiles_dir=`pwd`
 cd "$dotfile_dir"
-git pull origin master
+#git pull origin master
 echo
 
 function install {
 
   # ZSH
   ln -sf "$dotfiles_dir/.zshrc" ~/.zshrc
-  # Patched font for theme
-  fonts/install.sh
-  # Removing the default empty folder
-  rm -r "$ZSH/custom/plugins"
-  ln -sf "$dotfiles_dir/oh-my-zsh/plugins"  "$ZSH/custom"
-
 
   # Tmux
   ln -sf "$dotfiles_dir/.tmux.conf" ~/.tmux.conf
@@ -24,16 +18,32 @@ function install {
   # Vim
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.vimrc
   ln -sf "$dotfiles_dir/.vim" ~/.vim
+  if [ ! -d "~/.bin" ]; then
+    mkdir -p ~/.config/nvim/
+  fi
+
+  ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.config/nvim/init.vim
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   # Git
-  ln -sf "$dotfiles_dir/other/.gitconfig" ~/.gitconfig
+  ln -sf "$dotfiles_dir/.gitconfig" ~/.gitconfig
+  ln -sf "$dotfiles_dir/.gitignore" ~/.gitignore
 
-  # Atom
-  ln -sf "$dotfiles_dir/.atom" ~/.atom
+  # Editor config
+  ln -sf "$dotfiles_dir/.editorconfig" ~/.editorconfig
 
-  # Spacemacs
-  ln -sf "$dotfiles_dir/.spacemacs" ~/.spacemacs
-  ln -s "$dotfiles_dir/spacemacs/private" ~/.emacs.d
+  # Tmuxinator autocomplete
+  if [ ! -d "~/.bin" ]; then
+    mkdir ~/.bin
+  fi
+
+  ln -sf "$dotfiles_dir/tmuxinator.zsh" ~/.bin/tmuxinator.zsh
+
+  # Powerline patched fonts
+  ./fonts/install.sh
+
+
   echo "Installation completed. Enjoy!"
 }
 
