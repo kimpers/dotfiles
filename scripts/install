@@ -18,8 +18,8 @@ function install {
   # Vim
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.vimrc
   ln -sf "$dotfiles_dir/.vim" ~/.vim
-  if [ ! -d "~/.bin" ]; then
-    mkdir -p ~/.config/nvim/
+  if [ ! -d "~/.config/nvim" ]; then
+    mkdir -p ~/.config/nvim
   fi
 
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.config/nvim/init.vim
@@ -46,6 +46,8 @@ function install {
   # Enable key repeat for OSX
   defaults write -g ApplePressAndHoldEnabled -bool false
 
+  # Karabiner configuration
+  ln -sf "$dotfiles_dir/karabiner" ~/.config
 
   echo "Installation completed. Enjoy!"
 }
