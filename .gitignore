@@ -1,2 +1,6 @@
 .DS_Store
 local-history
+.vscode
+.tern-port
+*.code-workspace
+node_modules

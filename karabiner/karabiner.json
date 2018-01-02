@@ -182,7 +182,7 @@
                     "simple_modifications": [
                         {
                             "from": {
-                                "key_code": "non_us_pound"
+                                "key_code": "non_us_backslash"
                             },
                             "to": {
                                 "key_code": "grave_accent_and_tilde"
@@ -294,7 +294,7 @@
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
-                "keyboard_type": "iso"
+                "keyboard_type": "ansi"
             }
         }
     ]
