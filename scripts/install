@@ -46,6 +46,9 @@ function install {
   # Enable key repeat for OSX
   defaults write -g ApplePressAndHoldEnabled -bool false
 
+  # Enable non Apple time machines
+  defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
+
   # Karabiner configuration
   ln -sf "$dotfiles_dir/karabiner" ~/.config
 
