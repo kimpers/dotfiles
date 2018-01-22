@@ -23,8 +23,6 @@ Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'qpkorr/vim-bufkill'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'benekastah/neomake'
-Plug 'benjie/neomake-local-eslint.vim'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'heavenshell/vim-jsdoc'
@@ -41,9 +39,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+Plug 'w0rp/ale'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -52,14 +48,10 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-"Plug 'mxw/vim-jsx'
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-"Plug 'mhartington/nvim-typescript', {'do': ':UpdateRemotePlugins',  'for': 'typescript' }
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
@@ -70,13 +62,21 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
+Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 
 " Not needed?
 " Plug 'matze/vim-move'
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
+"Plug 'mxw/vim-jsx'
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
+"Plug 'mhartington/nvim-typescript', {'do': ':UpdateRemotePlugins',  'for': 'typescript' }
+"Plug 'benekastah/neomake'
+"Plug 'benjie/neomake-local-eslint.vim'
+"Plug 'matze/vim-move'
 "Plug 'SirVer/ultisnips'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 "Plug 'tpope/vim-repeat'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "Plug 'zhaocai/GoldenView.Vim'
@@ -150,9 +150,6 @@ set equalalways
 
 "  True colors
 set termguicolors
-
-" Enable spell check
-set spell
 
 " JsDoc
 nmap <silent> <leader>jd <Plug>(jsdoc)
@@ -247,6 +244,20 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" ALE
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\}
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+" ALE in Airline
+let g:airline#extensions#ale#enabled = 1
+
+" CSS Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
@@ -260,6 +271,7 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " Prettier
 let g:prettier#autoformat = 0
+let g:prettier#nvim_unstable_async = 1
 
 " vim-multiple-cursors
 " Disable deoplete while in multiple cursor mode due to incompatibilities
@@ -307,30 +319,6 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Neomake
-" Autoreload changed files for eslint fix on file save
-set autoread
-autocmd BufEnter * checktime
-
-let g:neomake_list_height = 4
-let g:neomake_open_list = 4
-let g:neomake_verbose = 0
-let g:neomake_javascript_eslint_exe = './node_modules/.bin/eslint'
-"let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_maker = {
-    \ 'args': ['--fix', '--no-color', '--format', 'compact'],
-    \ 'errorformat': '%f: line %l\, col %c\, %m'
-    \ }
-
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
-
-let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
-let g:neomake_typscript_tslint_exe = './node_modules/.bin/tslint'
-let g:neomake_typscript_tsc_exe = './node_modules/.bin/tsc'
-let g:neomake_typescript_tslint_args = ['--fix']
-
-autocmd! BufWritePost * Neomake
 autocmd! BufWritePost *.go GoTest
 
 " vim-go
