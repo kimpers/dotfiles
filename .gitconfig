@@ -22,3 +22,5 @@
 	gpgsign = true
 [diff]
 	context = 50
+[gpg]
+	program = gpg

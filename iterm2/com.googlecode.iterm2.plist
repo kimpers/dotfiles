@@ -58,7 +58,11 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>467 181 796 473 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>161 475 570 402 0 0 1440 877 </string>
+	<string>0 0 1440 878 0 0 1440 878 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>1762 237 585 402 1440 0 2560 1578 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>1783 214 585 402 1440 0 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -715,7 +719,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>26AF89E2-4F1D-40F1-9E24-2D7F9EA73636</string>
 	<key>NoSyncLastTipTime</key>
-	<real>536537569.797777</real>
+	<real>538340133.36713004</real>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -724,7 +728,23 @@
 	<array>
 		<string>000</string>
 		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
+		<string>0008</string>
+		<string>0009</string>
+		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
+		<string>0014</string>
 	</array>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -760,6 +780,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>~/.dotfiles/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -769,7 +791,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-02T15:00:30Z</date>
+	<date>2018-01-22T19:30:25Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>TabStyle</key>
