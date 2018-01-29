@@ -20,7 +20,7 @@
 	newHighlight = green bold 22
 [commit]
 	gpgsign = true
-[diff]
-	context = 50
 [gpg]
 	program = gpg
+[init]
+	templatedir = ~/.git-templates

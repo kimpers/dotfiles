@@ -124,4 +124,9 @@ gfadd() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Kubernetes auto-complete
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
