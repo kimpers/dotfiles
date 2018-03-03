@@ -58,11 +58,11 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>467 181 796 473 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 878 0 0 1440 878 </string>
+	<string>1440 -700 2560 1578 1440 -700 2560 1578 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1762 237 585 402 1440 0 2560 1578 </string>
+	<string>1762 -463 585 402 1440 -700 2560 1578 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1783 214 585 402 1440 0 2560 1578 </string>
+	<string>1783 -486 585 402 1440 -700 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -719,7 +719,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>26AF89E2-4F1D-40F1-9E24-2D7F9EA73636</string>
 	<key>NoSyncLastTipTime</key>
-	<real>538340133.36713004</real>
+	<real>541118596.76593399</real>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -742,6 +746,26 @@
 		<string>0012</string>
 		<string>0013</string>
 		<string>0014</string>
+		<string>0015</string>
+		<string>0016</string>
+		<string>0017</string>
+		<string>0018</string>
+		<string>0019</string>
+		<string>0020</string>
+		<string>0021</string>
+		<string>0022</string>
+		<string>0023</string>
+		<string>0024</string>
+		<string>0025</string>
+		<string>0026</string>
+		<string>0027</string>
+		<string>0028</string>
+		<string>0029</string>
+		<string>0030</string>
+		<string>0031</string>
+		<string>0032</string>
+		<string>0033</string>
+		<string>0034</string>
 	</array>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
@@ -791,13 +815,15 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-22T19:30:25Z</date>
+	<date>2018-02-18T22:32:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>TabStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.1.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
