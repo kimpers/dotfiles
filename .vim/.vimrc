@@ -70,6 +70,7 @@ Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
+Plug 'styled-components/vim-styled-components', {'for': 'Javascript'}
 
 " Not needed?
 " Plug 'matze/vim-move'
