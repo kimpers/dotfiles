@@ -9,7 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plugs to install
 " General
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-easymotion'
@@ -35,17 +35,22 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'metakirby5/codi.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
 Plug 'w0rp/ale'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
+"Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
@@ -55,10 +60,10 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'zchee/deoplete-go', {'for': 'go', 'do': 'make'}
+"Plug 'zchee/deoplete-go', {'for': 'go', 'do': 'make'}
 
 " Python
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+"Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
@@ -244,6 +249,42 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" lsp
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'typescript-language-server',
+      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+      \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+      \ })
+endif
+
+if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+endif
+
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+" async complete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_min_chars = 2
+" Path completion
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
 " ALE
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
@@ -260,32 +301,36 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
 " LanguageClient-neovim
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" Required for operations modifying multiple buffers like rename.
+set hidden
 
-" Minimal LSP configuration for JavaScript
-let g:LanguageClient_serverCommands = {}
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  " Use LanguageServer for omnifunc completion
-  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-else
-  echo "javascript-typescript-stdio not installed!\n"
-  :cq
-endif
+"let g:LanguageClient_serverCommands = {
+    "\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    "\ 'javascript': ['javascript-typescript-stdio'],
+    "\ 'javascript.jsx': ['javascript-typescript-stdio'],
+    "\ 'typescript': ['javascript-typescript-stdio'],
+    "\ }
 
-" <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-" Put this outside of the plugin section
-" <leader>lf to fuzzy find the symbols in the current document
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"let g:LanguageClient_autoStart = 1
+
+
+"" <leader>ld to go to definition
+"autocmd FileType javascript nnoremap <buffer>
+  "\ <leader>ld :call LanguageClient_textDocument_definition()<cr>
+"" <leader>lh for type info under cursor
+"autocmd FileType javascript nnoremap <buffer>
+  "\ <leader>lh :call LanguageClient_textDocument_hover()<cr>
+"" <leader>lr to rename variable under cursor
+"autocmd FileType javascript nnoremap <buffer>
+  "\ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+"" Put this outside of the plugin section
+"" <leader>lf to fuzzy find the symbols in the current document
+"autocmd FileType javascript nnoremap <buffer>
+  "\ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
 let g:prettier#autoformat = 0
@@ -322,11 +367,6 @@ let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_complete_start_length = 3
-" Use tern_for_vim.
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-autocmd BufEnter * set completeopt-=preview " Turn off autocomplete info buffer
 " deoplete-typescript
 let g:deoplete#sources#tss#javascript_support = 1
 
