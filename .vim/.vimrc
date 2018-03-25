@@ -40,11 +40,12 @@ Plug 'metakirby5/codi.vim'
     "\ 'do': 'bash install.sh',
     "\ }
 Plug 'w0rp/ale'
-Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -67,7 +68,7 @@ Plug 'fatih/vim-go', {'for': 'go'}
 
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
-Plug 'othree/csscomplete.vim', {'for': 'css'}
+"Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 Plug 'styled-components/vim-styled-components', {'for': 'Javascript'}
@@ -278,12 +279,20 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_min_chars = 2
+
 " Path completion
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
     \ 'name': 'file',
     \ 'whitelist': ['*'],
     \ 'priority': 10,
     \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['go', 'javascript', 'javascript.jsx', 'typescript'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ }))
 
 " ALE
@@ -296,9 +305,6 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 " ALE in Airline
 let g:airline#extensions#ale#enabled = 1
-
-" CSS Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
 " LanguageClient-neovim
 " Automatically start language servers.
@@ -334,20 +340,8 @@ set hidden
   "\ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
-let g:prettier#autoformat = 0
+let g:prettier#autoformat = 1
 let g:prettier#nvim_unstable_async = 1
-
-" vim-multiple-cursors
-" Disable deoplete while in multiple cursor mode due to incompatibilities
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  call deoplete#disable()
-endfunction
-
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  call deoplete#enable()
-endfunction
 
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
@@ -363,18 +357,6 @@ map <silent> <leader>ge <Plug>CamelCaseMotion_ge
 " Split vertically
 set diffopt+=vertical
 
-" Enable deoplete
-let g:deoplete#enable_at_startup = 1
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-let g:deoplete#file#enable_buffer_path = 1
-" deoplete-typescript
-let g:deoplete#sources#tss#javascript_support = 1
-
-" deoplete +  autopairs
-let g:AutoPairsMapCR=0
-let g:deoplete#enable_smart_case = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
