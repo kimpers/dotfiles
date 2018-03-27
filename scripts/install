@@ -52,6 +52,12 @@ function install {
   # Karabiner configuration
   ln -sf "$dotfiles_dir/karabiner" ~/.config
 
+  # vi file manager (vifm)
+  if [ ! -d "~/.vifm" ]; then
+    mkdir -p ~/.vifm
+  fi
+  ln -sf "$dotfiles_dir/vifmrc" ~/.vifm
+
   # Show hidden files in Finder
   sudo defaults write com.apple.Finder AppleShowAllFiles YES; killall Finder
 
