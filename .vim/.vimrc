@@ -251,6 +251,9 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" Codi
+let g:codi#width = 50
+let g:codi#rightalign = 0
 " lsp
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
