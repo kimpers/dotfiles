@@ -122,6 +122,18 @@ gfadd() {
   git add $(gfmod)
 }
 
+db() {
+  item=$(op get item $1)
+  username=$(echo $item | jq -c '.details.sections[0].fields[] | select(.n=="username")'.v | sed 's/"//g')
+  hostname=$(echo $item | jq -c '.details.sections[0].fields[] | select(.n=="hostname")'.v  | sed 's/"//g')
+  port=$(echo $item | jq -c '.details.sections[0].fields[] | select(.n=="port")'.v  | sed 's/"//g')
+
+
+  echo $item | jq -c '.details.sections[0].fields[] | select(.n=="password")'.v | sed 's/"//g' | pbcopy
+  pgcli --host $hostname --host $hostname -U $username --port $port
+  echo "" | pbcopy
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Kubernetes auto-complete
