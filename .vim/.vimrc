@@ -9,7 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plugs to install
 " General
 Plug 'tpope/vim-fugitive'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-easymotion'
@@ -35,17 +35,11 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'metakirby5/codi.vim'
-"Plug 'autozimu/LanguageClient-neovim', {
-    "\ 'branch': 'next',
-    "\ 'do': 'bash install.sh',
-    "\ }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'w0rp/ale'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -254,49 +248,9 @@ vnoremap <F9> zf
 " Codi
 let g:codi#width = 50
 let g:codi#rightalign = 0
-" lsp
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-      \ 'name': 'typescript-language-server',
-      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-      \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-      \ })
-endif
 
-if executable('go-langserver')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
-
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-
-" async complete
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_min_chars = 2
-
-" Path completion
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
-
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'whitelist': ['*'],
-    \ 'blacklist': ['go', 'javascript', 'javascript.jsx', 'typescript'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ }))
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
 " ALE
 let g:ale_fixers = {
@@ -314,37 +268,37 @@ let g:airline#extensions#ale#enabled = 1
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-"let g:LanguageClient_serverCommands = {
-    "\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    "\ 'javascript': ['javascript-typescript-stdio'],
-    "\ 'javascript.jsx': ['javascript-typescript-stdio'],
-    "\ 'typescript': ['javascript-typescript-stdio'],
-    "\ }
-
-"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-"let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ }
 
 
-"" <leader>ld to go to definition
-"autocmd FileType javascript nnoremap <buffer>
-  "\ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-"" <leader>lh for type info under cursor
-"autocmd FileType javascript nnoremap <buffer>
-  "\ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-"" <leader>lr to rename variable under cursor
-"autocmd FileType javascript nnoremap <buffer>
-  "\ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-"" Put this outside of the plugin section
-"" <leader>lf to fuzzy find the symbols in the current document
-"autocmd FileType javascript nnoremap <buffer>
-  "\ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
+" <leader>ld to go to definition
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
+" <leader>lh for type info under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
+" <leader>lr to rename variable under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+" Put this outside of the plugin section
+" <leader>lf to fuzzy find the symbols in the current document
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
 let g:prettier#autoformat = 1
 let g:prettier#nvim_unstable_async = 1
+
+" Temp until proper prettierrc
+let g:prettier#config#single_quote = "false"
+let g:prettier#config#trailing_comma = "none"
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
 
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
