@@ -10,6 +10,7 @@ zplug 'sindresorhus/pure', use:pure.zsh, from:github, as:theme
 zplug 'zsh-users/zsh-autosuggestions', from:github
 zplug "plugins/git", from:oh-my-zsh
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+zplug "paulirish/git-open", as:plugin
 
 zplug load
 
@@ -36,7 +37,7 @@ alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 
 alias python=python3
 
 # Other
-export PATH="$HOME/scripts:/usr/local/bin:$PATH"
+export PATH="$HOME/scripts:/usr/local/bin:/usr/local/lib/python3.6/site-packages/sox:/usr/local/lib/python2.7/site-packages/sox:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
