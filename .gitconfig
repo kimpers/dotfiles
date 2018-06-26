@@ -1,27 +1,29 @@
 [user]
-	email = kimpersson88@gmail.com
-	name = Kim Persson
-	signingkey = BEDF21BF
+  email = kimpersson88@gmail.com
+  name = Kim Persson
+  signingkey = BEDF21BF
 [push]
-	default = current
+  default = current
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
-	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
   bs = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  fix = "!${EDITOR} $(git diff --name-only --relative --diff-filter=U | uniq)"
+  stash-unstaged = stash -k -u
 [core]
-	excludesfile = /Users/kim/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  excludesfile = /Users/kim/.gitignore
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [commit]
-	gpgsign = true
+  gpgsign = true
 [gpg]
-	program = gpg
+  program = gpg
 [init]
-	templatedir = ~/.git-templates
+  templatedir = ~/.git-templates
