@@ -13,6 +13,7 @@
   bs = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   fix = "!${EDITOR} $(git diff --name-only --relative --diff-filter=U | uniq)"
   stash-unstaged = stash -k -u
+  addp = "add -N . && add -p"
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX

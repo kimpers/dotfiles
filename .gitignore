@@ -4,3 +4,4 @@ local-history
 .tern-port
 *.code-workspace
 node_modules
+certificates

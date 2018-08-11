@@ -32,15 +32,25 @@ alias o=open
 alias ga=gfadd
 alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"
 alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
+alias fuck-native="rm -rf ~/.gradle && yarn install && react-native link && cd ios && pod install && cd -"
 alias ip="curl icanhazip.com"
 alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 'Opportunity Backlog' AND issuetype != Epic ORDER BY Rank ASC\""
 alias python=python3
+alias dc=docker-compose
+alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
 
 # Other
-export PATH="$HOME/scripts:/usr/local/bin:/usr/local/lib/python3.6/site-packages/sox:/usr/local/lib/python2.7/site-packages/sox:$PATH"
+USER_BASE_PATH=$(python -m site --user-base)
+export PATH="$HOME/scripts:/usr/local/bin:$USER_BASE_PATH/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+
+# Android Dev
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # 256 colors tmux
 export TERM=xterm-256color
