@@ -66,6 +66,7 @@ Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 Plug 'styled-components/vim-styled-components', {'for': 'Javascript'}
+Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 
 " Not needed?
 " Plug 'matze/vim-move'
@@ -245,16 +246,21 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" Terraform
+let g:terraform_fmt_on_save=1
 " Codi
 let g:codi#width = 50
 let g:codi#rightalign = 0
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#enable_smart_case = 1
 
 " ALE
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'tslint'],
 \}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
@@ -360,7 +366,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=dark
+set background=light
 colorscheme NeoSolarized
 
 " Vim-ruby
@@ -376,9 +382,6 @@ au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 "set t_Co=256
-
-" Nerdtree autostart if vim is started without file argument
-autocmd vimenter * if !argc() | NERDTree | endif
 
 " Highlight matching bracket/parantheses
 autocmd vimenter * DoMatchParen
