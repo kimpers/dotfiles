@@ -62,7 +62,7 @@ Plug 'fatih/vim-go', {'for': 'go'}
 
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
-"Plug 'othree/csscomplete.vim', {'for': 'css'}
+Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 Plug 'styled-components/vim-styled-components', {'for': 'Javascript'}
@@ -252,11 +252,6 @@ let g:terraform_fmt_on_save=1
 let g:codi#width = 50
 let g:codi#rightalign = 0
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#enable_smart_case = 1
-
 " ALE
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
@@ -269,8 +264,12 @@ let g:ale_fix_on_save = 1
 " ALE in Airline
 let g:airline#extensions#ale#enabled = 1
 
+" CSS Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+
 " LanguageClient-neovim
 " Automatically start language servers.
+let g:LanguageClient_autoStart = 1
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
@@ -297,14 +296,19 @@ autocmd FileType javascript nnoremap <buffer>
   \ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
-let g:prettier#autoformat = 1
+let g:prettier#autoformat = 0
 let g:prettier#nvim_unstable_async = 1
 
-" Temp until proper prettierrc
-let g:prettier#config#single_quote = "false"
-let g:prettier#config#trailing_comma = "none"
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
+" vim-multiple-cursors
+" Disable deoplete while in multiple cursor mode due to incompatibilities
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  call deoplete#disable()
+endfunction
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  call deoplete#enable()
+endfunction
 
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
@@ -320,6 +324,14 @@ map <silent> <leader>ge <Plug>CamelCaseMotion_ge
 " Split vertically
 set diffopt+=vertical
 
+" Enable deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#enable_smart_case = 1
+
+" deoplete +  autopairs
+let g:AutoPairsMapCR=0
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
