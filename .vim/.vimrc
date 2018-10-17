@@ -282,18 +282,14 @@ let g:LanguageClient_serverCommands = {
 
 
 " <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
+nnoremap <leader>ld :call LanguageClient_textDocument_definition()<cr>
 " <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
+nnoremap <leader>lh :call LanguageClient_textDocument_hover()<cr>
 " <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+nnoremap <leader>lr :call LanguageClient_textDocument_rename()<cr>
 " Put this outside of the plugin section
 " <leader>lf to fuzzy find the symbols in the current document
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
+nnoremap <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
 let g:prettier#autoformat = 0

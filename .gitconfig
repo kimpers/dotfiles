@@ -14,6 +14,7 @@
   fix = "!${EDITOR} $(git diff --name-only --relative --diff-filter=U | uniq)"
   stash-unstaged = stash -k -u
   addp = "add -N . && add -p"
+  co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
