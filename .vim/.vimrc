@@ -40,6 +40,10 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'w0rp/ale'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']
+  \ }
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -292,8 +296,15 @@ nnoremap <leader>lr :call LanguageClient_textDocument_rename()<cr>
 nnoremap <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " Prettier
-let g:prettier#autoformat = 0
 let g:prettier#nvim_unstable_async = 1
+" Temp until proper prettierrc
+let g:prettier#autoformat = 1
+
+" Temp until proper prettierrc
+let g:prettier#config#single_quote = "false"
+let g:prettier#config#trailing_comma = "none"
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
 
 " vim-multiple-cursors
 " Disable deoplete while in multiple cursor mode due to incompatibilities
