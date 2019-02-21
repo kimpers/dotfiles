@@ -44,6 +44,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']
   \ }
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -282,7 +283,12 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio'],
-    \ }
+    \ 'go': ['bingo', '--mode', 'stdio', '--logfile', '/tmp/lspserver.log','--trace', '--pprof', ':6060']
+\ }
+
+let g:LanguageClient_rootMarkers = {
+    \ 'go': ['.git', 'go.mod'],
+\ }
 
 
 " <leader>ld to go to definition
@@ -336,6 +342,9 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#enable_smart_case = 1
 
+" Rank LanguageClient results higher than other completion
+call deoplete#custom#source('LanguageClient', 'rank', 9999)
+
 " deoplete +  autopairs
 let g:AutoPairsMapCR=0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -385,7 +394,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=light
+set background=dark
 colorscheme NeoSolarized
 
 " Vim-ruby
@@ -419,3 +428,6 @@ nmap ga <Plug>(EasyAlign)
 autocmd FileType eruby let g:surround_45 = "<% \r %>"
 autocmd FileType eruby let g:surround_61 = "<%= \r %>"
 autocmd FileType eruby let g:surround_33 = "```\r```"
+
+" Python providers
+let g:python3_host_prog = '/Users/kim/.pyenv/shims/python3'  " Python 3

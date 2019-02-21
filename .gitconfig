@@ -15,6 +15,7 @@
   stash-unstaged = stash -k -u
   addp = "add -N . && add -p"
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+  pushf = "push --force-with-lease"
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
@@ -29,3 +30,5 @@
   program = gpg
 [init]
   templatedir = ~/.git-templates
+[rerere]
+	enabled = true
