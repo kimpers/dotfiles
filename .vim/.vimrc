@@ -261,6 +261,7 @@ let g:codi#rightalign = 0
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
 \   'typescript': ['prettier', 'tslint'],
+\   'graphql':    ['prettier']
 \}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
