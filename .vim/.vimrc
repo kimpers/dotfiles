@@ -9,7 +9,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plugs to install
 " General
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-easymotion'
@@ -39,18 +38,12 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'w0rp/ale'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']
-  \ }
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-"Plug 'fishbullet/deoplete-ruby', {'for': 'ruby'}
 
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
@@ -60,10 +53,6 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
-"Plug 'zchee/deoplete-go', {'for': 'go', 'do': 'make'}
-
-" Python
-"Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
@@ -77,7 +66,6 @@ Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 " Plug 'matze/vim-move'
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 "Plug 'mxw/vim-jsx'
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
 "Plug 'mhartington/nvim-typescript', {'do': ':UpdateRemotePlugins',  'for': 'typescript' }
 "Plug 'benekastah/neomake'
 "Plug 'benjie/neomake-local-eslint.vim'
@@ -107,7 +95,6 @@ Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 "Plug 'othree/yajs.vim'
 "https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
 "Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
-"Plug 'thalesmello/deoplete-flow', {'for': 'javascript'}
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -251,78 +238,22 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" Coc.nvim
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
 " Terraform
 let g:terraform_fmt_on_save=1
 " Codi
 let g:codi#width = 50
 let g:codi#rightalign = 0
-
-" ALE
-let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'tslint'],
-\   'graphql':    ['prettier']
-\}
-
-" Set this setting in vimrc if you want to fix files automatically on save.
-" This is off by default.
-let g:ale_fix_on_save = 1
-" ALE in Airline
-let g:airline#extensions#ale#enabled = 1
-
-" CSS Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-
-" LanguageClient-neovim
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'typescript': ['javascript-typescript-stdio'],
-    \ 'go': ['bingo', '--mode', 'stdio', '--logfile', '/tmp/lspserver.log','--trace', '--pprof', ':6060']
-\ }
-
-let g:LanguageClient_rootMarkers = {
-    \ 'go': ['.git', 'go.mod'],
-\ }
-
-
-" <leader>ld to go to definition
-nnoremap <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-nnoremap <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-nnoremap <leader>lr :call LanguageClient_textDocument_rename()<cr>
-" Put this outside of the plugin section
-" <leader>lf to fuzzy find the symbols in the current document
-nnoremap <leader>lf :call LanguageClient_textDocument_documentSymbol()<cr>
-
-" Prettier
-let g:prettier#nvim_unstable_async = 1
-" Temp until proper prettierrc
-let g:prettier#autoformat = 1
-
-" Temp until proper prettierrc
-let g:prettier#config#single_quote = "false"
-let g:prettier#config#trailing_comma = "none"
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-
-" vim-multiple-cursors
-" Disable deoplete while in multiple cursor mode due to incompatibilities
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  call deoplete#disable()
-endfunction
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  call deoplete#enable()
-endfunction
 
 " vim-javascript
 let g:javascript_plugin_jsdoc = 1
@@ -337,18 +268,6 @@ map <silent> <leader>ge <Plug>CamelCaseMotion_ge
 " Fugitive
 " Split vertically
 set diffopt+=vertical
-
-" Enable deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#enable_smart_case = 1
-
-" Rank LanguageClient results higher than other completion
-call deoplete#custom#source('LanguageClient', 'rank', 9999)
-
-" deoplete +  autopairs
-let g:AutoPairsMapCR=0
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Use markdown syntax for .md
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -385,9 +304,6 @@ set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <leader>t :FZF!<CR>
-
-" Vim Jedi
-let g:jedi#popup_on_dot = 0
 
 " GitGutter
 " Performance optimization
