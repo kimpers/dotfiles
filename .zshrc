@@ -38,6 +38,9 @@ alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 
 alias python=python3
 alias dc=docker-compose
 alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
+# Switch Java version
+alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
+alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 
 # Other
 USER_BASE_PATH=$(python -m site --user-base)
