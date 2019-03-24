@@ -58,6 +58,8 @@ function install {
   fi
   ln -sf "$dotfiles_dir/vifmrc" ~/.vifm
 
+  ln -sf "$dotfiles_dir/.vim/coc-settings.json" ~/.config/nvim
+
   # Show hidden files in Finder
   sudo defaults write com.apple.Finder AppleShowAllFiles YES; killall Finder
 
