@@ -2,6 +2,9 @@
   "tslint.enable": true,
   "tslint.run": "onSave",
   "tslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
   "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql"],
   "languageserver": {
     "golang": {
