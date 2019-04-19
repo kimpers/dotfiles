@@ -51,6 +51,9 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
+
 " Other
 Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'othree/csscomplete.vim', {'for': 'css'}
@@ -234,6 +237,13 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" markdown-preview-nvim
+" set to 1, nvim will open the preview window after entering the markdown buffer
+let g:mkdp_auto_start = 0
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+let g:mkdp_auto_close = 1
+
 " Coc.nvim
 let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
 " Better display for messages

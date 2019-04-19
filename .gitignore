@@ -5,3 +5,4 @@ local-history
 *.code-workspace
 node_modules
 certificates
+iterm2/
