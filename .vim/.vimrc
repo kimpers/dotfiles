@@ -29,12 +29,13 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'cohama/lexima.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'bkad/CamelCaseMotion'
 Plug 'danro/rename.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'metakirby5/codi.vim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -84,7 +85,6 @@ Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 "Plug 'tpope/vim-rails', {'for': 'ruby'}
 "Plug 'sheerun/vim-polyglot', { 'do': './build' }
 "Plug 'jiangmiao/auto-pairs'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'Shougo/neosnippet'
 "Plug 'Shougo/neosnippet-snippets'
 "Plug 'honza/vim-snippets'
@@ -282,12 +282,6 @@ let g:codi#rightalign = 0
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
-" CamelCaseMotion
-call camelcasemotion#CreateMotionMappings('<leader>')
-map <silent> <leader>w <Plug>CamelCaseMotion_w
-map <silent> <leader>b <Plug>CamelCaseMotion_b
-map <silent> <leader>e <Plug>CamelCaseMotion_e
-map <silent> <leader>ge <Plug>CamelCaseMotion_ge
 " Fugitive
 " Split vertically
 set diffopt+=vertical
@@ -327,6 +321,8 @@ set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <leader>t :FZF!<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :GFiles?<CR>
 
 " GitGutter
 " Performance optimization
@@ -334,7 +330,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=dark
+set background=light
 colorscheme NeoSolarized
 
 " Vim-ruby
