@@ -1,4 +1,6 @@
 {
+  "typescript.suggest.autoImports": false,
+  "javascript.suggest.autoImports": false,
   "tslint.enable": true,
   "tslint.run": "onSave",
   "tslint.autoFixOnSave": true,

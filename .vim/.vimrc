@@ -350,7 +350,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Text and latex specific settings
-au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
+au FileType text,tex,markdown,gitcommit setlocal wrap linebreak nolist spell spelllang=en_us
 
 " Always show statusline
 set laststatus=2
