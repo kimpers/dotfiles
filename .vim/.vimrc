@@ -44,6 +44,7 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'styled-components/vim-styled-components', {'for': 'javascript'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
@@ -51,49 +52,15 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
-
-" Other
+" CSS
 Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
-Plug 'tomlion/vim-solidity', {'for': 'solidity'}
-Plug 'styled-components/vim-styled-components', {'for': 'Javascript'}
-Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 
-" Not needed?
-" Plug 'matze/vim-move'
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
-"Plug 'mxw/vim-jsx'
-"Plug 'mhartington/nvim-typescript', {'do': ':UpdateRemotePlugins',  'for': 'typescript' }
-"Plug 'benekastah/neomake'
-"Plug 'benjie/neomake-local-eslint.vim'
-"Plug 'matze/vim-move'
-"Plug 'SirVer/ultisnips'
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-"Plug 'tpope/vim-repeat'
-"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-"Plug 'zhaocai/GoldenView.Vim'
-"Plug 'tpope/vim-unimpaired'
-"Plug 'terryma/vim-expand-region'
-"Plug 'sheerun/vim-polyglot', { 'do': './build' }
-"Plug 'benmills/vimux'
-"Plug 'tpope/vim-dispatch'
-"Plug 'jonathanfilip/vim-lucius'
-"Plug 'jpo/vim-railscasts-theme'
-"Plug 'szw/vim-ctrlspace'
-"Plug 'digitaltoad/vim-jade', {'for': 'jade'}
-"Plug 'moll/vim-node', {'for': 'javascript'}
-"Plug 'tpope/vim-rails', {'for': 'ruby'}
-"Plug 'sheerun/vim-polyglot', { 'do': './build' }
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'Shougo/neosnippet'
-"Plug 'Shougo/neosnippet-snippets'
-"Plug 'honza/vim-snippets'
-"Plug 'othree/yajs.vim'
-"https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-"Plug 'flowtype/vim-flow', { 'do': 'npm install -g flow-bin', 'for': 'javascript'}
+" Other
+Plug 'tomlion/vim-solidity', {'for': 'solidity'}
+Plug 'hashivim/vim-terraform', {'for': 'terraform'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -141,20 +108,21 @@ command! RM :call delete(expand('%')) | bdelete!
 set equalalways
 
 
-"  True colors
+" True colors
 set termguicolors
 
 " JsDoc
 nmap <silent> <leader>jd <Plug>(jsdoc)
 
-  "NeoVim handles ESC keys as alt+key, set this to solve the problem
-  set timeout
-  set timeoutlen=750
-  set ttimeoutlen=250
-  if has('nvim')
-     set ttimeout
-     set ttimeoutlen=0
-  endif
+" NeoVim handles ESC keys as alt+key, set this to solve the problem
+set timeout
+set timeoutlen=750
+set ttimeoutlen=250
+if has('nvim')
+    set ttimeout
+    set ttimeoutlen=0
+endif
+
 " Set hybrid relative and absolute line numbers
 set number
 set relativenumber
