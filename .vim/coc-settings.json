@@ -7,7 +7,8 @@
   "eslint.enable": true,
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
-  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql"],
+  "coc.source.emoji.filetypes": ["markdown", "gitcommit", "text"],
   "languageserver": {
     "golang": {
       "command": "bingo",

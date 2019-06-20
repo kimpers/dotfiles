@@ -61,6 +61,7 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
+Plug 'jparise/vim-graphql', {'for': ['graphql', 'javascript', 'typescript']}
 
 call plug#end()
 " ------------------------------------------------------------------------
