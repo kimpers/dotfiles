@@ -16,6 +16,11 @@
   addp = "add -N . && add -p"
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   pushf = "push --force-with-lease"
+  pr="!f() { \
+      BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD); \
+      git push -u origin $BRANCH_NAME;                \
+      hub pull-request --draft;                       \
+  };f "
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
