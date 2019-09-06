@@ -295,6 +295,9 @@ nmap <leader>/  <Plug>CtrlSFPrompt
 " leader / in visual searches for files containing selection
 vmap <leader>/ <Plug>CtrlSFVwordExec
 
+" Sort selected lines
+vmap <leader>ss :'<,'>sort<CR>
+
 " FZF
 set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
