@@ -44,7 +44,7 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'styled-components/vim-styled-components', {'for': 'javascript'}
+Plug 'styled-components/vim-styled-components', {'for': ['javascript', 'typescript', 'typescript.tsx']}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
@@ -56,6 +56,9 @@ Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'JulesWang/css.vim', {'for': 'css'}
 Plug 'othree/csscomplete.vim', {'for': 'css'}
 Plug 'ap/vim-css-color', {'for': 'css'}
+
+" Python
+Plug 'psf/black', {'for': 'python'}
 
 " Other
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
@@ -206,6 +209,9 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" black (python code formatting)
+autocmd BufWritePre *.py execute ':Black'
+
 " markdown-preview-nvim
 " set to 1, nvim will open the preview window after entering the markdown buffer
 let g:mkdp_auto_start = 0
@@ -214,7 +220,7 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 
 " Coc.nvim
-let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint']
 " Better display for messages
 set cmdheight=2
 " Smaller updatetime for CursorHold & CursorHoldI
@@ -312,7 +318,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=light
+set background=dark
 colorscheme NeoSolarized
 
 " Vim-ruby
