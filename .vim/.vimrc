@@ -107,6 +107,9 @@ command -bang -bar -nargs=? -complete=file E :call s:MKDir(<f-args>) | e<bang> <
 command! RM :call delete(expand('%')) | bdelete!
 
 " Settings ----------------------------------------------------------------------------------
+" Enable English spell check
+set spell spelllang=en_us
+
 " Disable equal always to avoid resizing splits automatically
 "set noea
 set equalalways

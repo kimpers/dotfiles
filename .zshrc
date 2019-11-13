@@ -28,6 +28,7 @@ alias copy-branch="git rev-parse --abbrev-ref HEAD | pbcopy"
 alias lck="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias vim=nvim
 alias vi=nvim
+alias vis="nvim -u NONE"
 alias o=open
 alias ga=gfadd
 alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"

@@ -21,6 +21,8 @@
       git push -u origin $BRANCH_NAME;                \
       hub pull-request --draft;                       \
   };f "
+co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };f"
+
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
