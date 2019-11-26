@@ -42,6 +42,7 @@ alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
 # Switch Java version
 alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
+alias uuid="npx uuid v1 | pbcopy && pbpaste"
 
 # Other
 USER_BASE_PATH=$(python -m site --user-base)

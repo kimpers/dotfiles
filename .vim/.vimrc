@@ -8,14 +8,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugs to install
 " General
-Plug 'tpope/vim-fugitive'
 Plug 'iCyMind/NeoSolarized'
 Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'sickill/vim-pasta'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
 Plug 'kana/vim-textobj-user'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
@@ -36,6 +34,11 @@ Plug 'metakirby5/codi.vim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -83,14 +86,6 @@ function! JsonFmt()
 endfunction
 
 command! JsonFmt :call JsonFmt()
-
-" Git add current buffer
-function! GitAddBuffer()
-  w
-  windo !git add %
-endfunction
- 
-command! GitAddBuffer :call GitAddBuffer()
 
 " :E to create a new file inside new folder(s)
 function s:MKDir(...)
@@ -212,6 +207,9 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" Magit
+autocmd User VimagitEnterCommit setlocal textwidth=72
+autocmd User VimagitLeaveCommit setlocal textwidth=0
 " black (python code formatting)
 autocmd BufWritePre *.py execute ':Black'
 
