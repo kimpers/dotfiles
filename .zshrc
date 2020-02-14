@@ -36,7 +36,6 @@ alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
 alias fuck-native="rm -rf ~/.gradle && yarn install && react-native link && cd ios && pod install && cd -"
 alias ip="curl icanhazip.com"
 alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 'Opportunity Backlog' AND issuetype != Epic ORDER BY Rank ASC\""
-alias python=python3
 alias dc=docker-compose
 alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
 # Switch Java version
@@ -50,6 +49,7 @@ export PATH="$HOME/scripts:/usr/local/bin:$USER_BASE_PATH/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+export GPG_TTY=`tty`
 
 # Android Dev
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -88,12 +88,7 @@ else
   export EDITOR='nvim'
   export VISUAL='nvim'
 fi
-# Leovegas shortcut commands
-i18n () { (cd apps/mobile && grunt i18n) && (cd apps/desktop && grunt i18n) }
-leo () { BACKEND=https://$1.leovegas.com APP=$2 npm run start }
-api () {  curl http://localhost:8000/$1 | python -m json.tool }
-work () { (cd apps/$1 && grunt work) }
-cordova-build-local () { TARGET=local cordova build $1 }
+
 brew-cask-upgrade() {
   if [ "$1" != '--quick' ]; then
     echo "Removing brew cache"
@@ -114,16 +109,6 @@ brew-cask-upgrade() {
       esac
     done
   done
-}
-
-fuck-e2e () {
-  GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
-  BRANCH=`basename $GIT_BRANCH`
-  GIT_TAG_PREPUSH="prepush-$BRANCH"
-
-  git fetch --tags && git tag -d ${GIT_TAG_PREPUSH} && git push origin :refs/tags/${GIT_TAG_PREPUSH} --no-verify
-  git tag ${GIT_TAG_PREPUSH} -m "auto tag from successful pre-push run"
-  git push origin ${GIT_TAG_PREPUSH} --no-verify || printf "\033[31mFailed to push git tag ${GIT_TAG_PREPUSH}\033[0m\n";
 }
 
 # FZF git add
@@ -150,7 +135,9 @@ db() {
   echo "" | pbcopy
 }
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.dotfiles/.zsh_private ] && source ~/.dotfiles/.zsh_private
 
 # Kubernetes auto-complete
 if [ $commands[kubectl] ]; then

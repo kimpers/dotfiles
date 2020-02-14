@@ -7,3 +7,5 @@ node_modules
 certificates
 __pycache__
 .vim/black/
+output
+.zsh_private

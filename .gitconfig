@@ -34,7 +34,7 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
 [commit]
   gpgsign = true
 [gpg]
-  program = gpg
+  program = /usr/local/bin/gpg
 [init]
   templatedir = ~/.git-templates
 [rerere]

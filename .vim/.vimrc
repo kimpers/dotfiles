@@ -31,7 +31,7 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'metakirby5/codi.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -47,7 +47,8 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'styled-components/vim-styled-components', {'for': ['javascript', 'typescript', 'typescript.tsx']}
+" Disabled for now due to buggy typescript integration
+"Plug 'styled-components/vim-styled-components', {'for': ['javascript', 'typescript', 'typescript.tsx'], 'branch': 'main'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
@@ -355,4 +356,5 @@ autocmd FileType eruby let g:surround_61 = "<%= \r %>"
 autocmd FileType eruby let g:surround_33 = "```\r```"
 
 " Python providers
-let g:python3_host_prog = '/Users/kim/.pyenv/shims/python3'  " Python 3
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
