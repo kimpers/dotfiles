@@ -34,6 +34,8 @@ Plug 'metakirby5/codi.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
+Plug 'voldikss/vim-floaterm'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -208,9 +210,18 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" vim-floaterm
+let g:floaterm_gitcommit = 'vsplit'
+let g:floaterm_keymap_toggle = '<leader>ftt'
+" vim-import-cost
+" Check import costs on save
+nnoremap <silent> <leader>ic :ImportCost<CR>
+nnoremap <silent> <leader>icc :ImportCostClear<CR>
+
 " Magit
 autocmd User VimagitEnterCommit setlocal textwidth=72
 autocmd User VimagitLeaveCommit setlocal textwidth=0
+
 " black (python code formatting)
 autocmd BufWritePre *.py execute ':Black'
 
@@ -222,7 +233,7 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 
 " Coc.nvim
-let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-styled-components', 'coc-rls']
 " Better display for messages
 set cmdheight=2
 " Smaller updatetime for CursorHold & CursorHoldI
@@ -290,6 +301,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 
+" Gopls
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -320,7 +334,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=dark
+set background=light
 colorscheme NeoSolarized
 
 " Vim-ruby

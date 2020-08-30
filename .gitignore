@@ -9,3 +9,5 @@ __pycache__
 .vim/black/
 output
 .zsh_private
+dump.sql
+karabiner/automatic_backups/

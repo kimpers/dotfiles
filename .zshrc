@@ -42,6 +42,7 @@ alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
 alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 alias uuid="npx uuid v1 | pbcopy && pbpaste"
+alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
 
 # Other
 USER_BASE_PATH=$(python -m site --user-base)
@@ -153,3 +154,11 @@ if [ -f '/Users/kim/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+  if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+

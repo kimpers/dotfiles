@@ -36,6 +36,8 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
 [gpg]
   program = /usr/local/bin/gpg
 [init]
-  templatedir = ~/.git-templates
+	templatedir = ~/.git-templates
 [rerere]
 	enabled = true
+[hub]
+	protocol = ssh
