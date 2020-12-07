@@ -66,11 +66,16 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 " Python
 Plug 'psf/black', {'for': 'python'}
 
+" Rust
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'mattn/webapi-vim'
+
 " Other
 Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 Plug 'jparise/vim-graphql', {'for': ['graphql', 'javascript', 'typescript']}
+Plug 'jxnblk/vim-mdx-js', {'for': ['markdown', 'markdown.mdx']}
 
 call plug#end()
 " ------------------------------------------------------------------------
@@ -210,6 +215,12 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Plugins --------------------------------------------------------------------------------------
+" rust.vim
+let g:rust_clip_command = 'pbcopy'
+" Run test under cursor
+nnoremap <silent> <leader>rtc :RustTest<CR>
+" Run all project tests
+nnoremap <silent> <leader>rt :RustTest!<CR>
 " vim-floaterm
 let g:floaterm_gitcommit = 'vsplit'
 let g:floaterm_keymap_toggle = '<leader>ft'
@@ -334,7 +345,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=light
+set background=dark
 colorscheme NeoSolarized
 
 " Vim-ruby
@@ -343,7 +354,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-" Text and latex specific settings
+" Markdown, text and latex specific settings
 au FileType text,tex,markdown,gitcommit setlocal wrap linebreak nolist spell spelllang=en_us
 
 " Always show statusline
@@ -362,6 +373,8 @@ au VimEnter * IndentGuidesEnable
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+" Align markdown tables with vip + |
+au FileType markdown,conf,markdown.mdx map <Bar> vip :EasyAlign*<Bar><Enter>
 
 " Vim-surround
 " ERB tags

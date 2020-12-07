@@ -31,16 +31,8 @@ alias vi=nvim
 alias vis="nvim -u NONE"
 alias o=open
 alias ga=gfadd
-alias fuck="rm -rf ./node_modules && yarn && rm yarn.lock"
-alias fuck-up="g up orgin master && rm -rf ./node_modules && npm install"
-alias fuck-native="rm -rf ~/.gradle && yarn install && react-native link && cd ios && pod install && cd -"
 alias ip="curl icanhazip.com"
-alias jira-sbm="jira issue jql \"project = SBM AND status != Done AND status != 'Opportunity Backlog' AND issuetype != Epic ORDER BY Rank ASC\""
 alias dc=docker-compose
-alias xcode-app="open ios/AnyfinMobileApp.xcworkspace"
-# Switch Java version
-alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
-alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 alias uuid="npx uuid v1 | pbcopy && pbpaste"
 alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
 

@@ -41,3 +41,5 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
 	enabled = true
 [hub]
 	protocol = ssh
+[pull]
+	ff = only
