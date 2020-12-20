@@ -217,10 +217,10 @@ vnoremap <F9> zf
 " Plugins --------------------------------------------------------------------------------------
 " rust.vim
 let g:rust_clip_command = 'pbcopy'
-" Run test under cursor
-nnoremap <silent> <leader>rtc :RustTest<CR>
-" Run all project tests
-nnoremap <silent> <leader>rt :RustTest!<CR>
+" Run test under cursor with prints
+nnoremap <silent> <leader>rtc :RustTest -- --nocapture<CR>
+" Run all project tests with prints
+nnoremap <silent> <leader>rt :RustTest! -- --nocapture<CR>
 " vim-floaterm
 let g:floaterm_gitcommit = 'vsplit'
 let g:floaterm_keymap_toggle = '<leader>ft'
