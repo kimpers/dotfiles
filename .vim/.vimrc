@@ -17,10 +17,13 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'kana/vim-textobj-user'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
-Plug 'nathanaelkane/vim-indent-guides'
+if !exists('g:vscode')
+  Plug 'nathanaelkane/vim-indent-guides'
+endif
 Plug 'qpkorr/vim-bufkill'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'rking/ag.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'dyng/ctrlsf.vim'
@@ -239,9 +242,6 @@ autocmd BufWritePre *.py execute ':Black'
 " markdown-preview-nvim
 " set to 1, nvim will open the preview window after entering the markdown buffer
 let g:mkdp_auto_start = 0
-" set to 1, the nvim will auto close current preview window when change
-" from markdown buffer to another buffer
-let g:mkdp_auto_close = 1
 
 " Coc.nvim
 let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-styled-components', 'coc-rls', 'coc-rust-analyzer']
@@ -345,7 +345,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Solarized theme
-set background=dark
+set background=light
 colorscheme NeoSolarized
 
 " Vim-ruby

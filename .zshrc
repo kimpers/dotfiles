@@ -35,6 +35,8 @@ alias ip="curl icanhazip.com"
 alias dc=docker-compose
 alias uuid="npx uuid v1 | pbcopy && pbpaste"
 alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
+alias yarn-project-linked-packages="find . -type l | grep -v .bin | sed 's/^\.\/node_modules\///'"
+alias yarn-global-linked-packages='find ~/.config/yarn/link  -maxdepth 2 -type l | xargs realpath -s --relative-to ~/.config/yarn/link'
 
 # Other
 USER_BASE_PATH=$(python -m site --user-base)
@@ -168,3 +170,10 @@ if [ -f '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/U
     compinit
   fi
 
+
+export YVM_DIR=/usr/local/opt/yvm
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
