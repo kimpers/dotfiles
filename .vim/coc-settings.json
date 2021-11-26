@@ -19,7 +19,8 @@
     "typescriptreact",
     "json",
     "graphql",
-    "rust"
+    "rust",
+    "solidity"
   ],
   "coc.source.emoji.filetypes": [
     "markdown",
@@ -38,5 +39,6 @@
         "usePlaceholders": true
       }
     }
-  }
+  },
+  "rust.clippy_preference": "on"
 }

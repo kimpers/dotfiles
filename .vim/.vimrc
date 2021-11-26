@@ -15,6 +15,7 @@ Plug 'sickill/vim-pasta'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'kana/vim-textobj-user'
+Plug 'rhysd/vim-textobj-conflict'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
 if !exists('g:vscode')
@@ -70,7 +71,7 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'psf/black', {'for': 'python'}
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'mattn/webapi-vim'
 
 " Other
@@ -244,7 +245,7 @@ autocmd BufWritePre *.py execute ':Black'
 let g:mkdp_auto_start = 0
 
 " Coc.nvim
-let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-styled-components', 'coc-rls', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-styled-components', 'coc-rls', 'coc-rust-analyzer', 'coc-rls']
 " Better display for messages
 set cmdheight=2
 " Smaller updatetime for CursorHold & CursorHoldI

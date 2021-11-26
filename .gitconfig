@@ -17,15 +17,19 @@
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   pushf = "push --force-with-lease"
   pr="!f() { \
-      BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD); \
-      git push -u origin $BRANCH_NAME;                \
-      hub pull-request --draft;                       \
+    BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD); \
+    git push -u origin $BRANCH_NAME;                \
+    hub pull-request --draft;                       \
   };f "
 co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };f"
 
 [core]
   excludesfile = /Users/kim/.gitignore
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = red bold 52
@@ -36,10 +40,21 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
 [gpg]
   program = /usr/local/bin/gpg
 [init]
-	templatedir = ~/.git-templates
+  templatedir = ~/.git-templates
+  defaultBranch = main
 [rerere]
-	enabled = true
+  enabled = true
 [hub]
-	protocol = ssh
+  protocol = ssh
 [pull]
-	ff = only
+  ff = only
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[delta]
+  line-numbers = true
+  light = true
+  show-syntax-themes = true
