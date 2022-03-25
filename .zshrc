@@ -118,6 +118,10 @@ gfadd() {
   git add $(gfmod)
 }
 
+mov2gif() {
+  ffmpeg -i $1 -pix_fmt rgb8 -r 10 output.gif && gifsicle -O3 output.gif -o output.gif
+}
+
 db() {
   item=$(op get item $1)
   username=$(echo $item | jq -c '.details.sections[0].fields[] | select(.n=="username")'.v | sed 's/"//g')
@@ -177,3 +181,5 @@ if [ -f '/Users/kim/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$PATH:/Users/kim/.foundry/bin"

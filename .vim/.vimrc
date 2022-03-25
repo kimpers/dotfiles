@@ -46,11 +46,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
 
-" Ruby
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'tpope/vim-endwise', {'for': 'ruby'}
-Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-
 " Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 " Disabled for now due to buggy typescript integration

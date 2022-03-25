@@ -40,5 +40,6 @@
       }
     }
   },
-  "rust.clippy_preference": "on"
+  "rust.clippy_preference": "on",
+  "rust.unstable_features": true
 }
