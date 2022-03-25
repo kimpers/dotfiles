@@ -379,5 +379,6 @@ autocmd FileType eruby let g:surround_61 = "<%= \r %>"
 autocmd FileType eruby let g:surround_33 = "```\r```"
 
 " Python providers
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+"let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:ruby_host_prog = '/opt/homebrew/opt/ruby/bin/ruby'
