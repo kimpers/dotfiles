@@ -1,5 +1,4 @@
 kubernetes
 neovim
-pgcli
 neovim-remote
 pynvim
