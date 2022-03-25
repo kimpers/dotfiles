@@ -14,6 +14,8 @@ function install {
 
   # Tmux
   ln -sf "$dotfiles_dir/.tmux.conf" ~/.tmux.conf
+  # Install Tmux Plugin Manager
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
   # Vim
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.vimrc

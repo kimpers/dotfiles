@@ -1,5 +1,7 @@
+# Use always python3
+alias python=python3
 # Plugins
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 fpath+=("/usr/local/share/zsh/site-functions")
 
@@ -183,3 +185,4 @@ if [ -f '/Users/kim/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k
 if [ -f '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kim/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="$PATH:/Users/kim/.foundry/bin"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
