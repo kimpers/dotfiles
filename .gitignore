@@ -11,3 +11,5 @@ output
 .zsh_private
 dump.sql
 karabiner/automatic_backups/
+demo_reqs
+.rust_analyzer_target_editor/

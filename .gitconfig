@@ -1,7 +1,7 @@
 [user]
-  email = kimpersson88@gmail.com
-  name = Kim Persson
-  signingkey = BEDF21BF
+	email = kim@phantom.app
+	name = Kim Persson
+	signingKey = BBFD886A1120D6CB
 [push]
   default = current
 [alias]
@@ -16,16 +16,14 @@
   addp = "add -N . && add -p"
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   pushf = "push --force-with-lease"
-  pr="!f() { \
-    BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD); \
-    git push -u origin $BRANCH_NAME;                \
-    hub pull-request --draft;                       \
-  };f "
-co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };f"
+	pr = "!f() { if [ $# -lt 1 ]; then echo \"Usage: git pr <id> [<remote>]  # assuming <remote>[=origin] is on GitHub\"; else git checkout -q \"$(git rev-parse --verify HEAD)\" && git fetch -fv \"${2:-origin}\" pull/\"$1\"/head:pr/\"$1\" && git checkout pr/\"$1\"; fi; }; f"
+  search = "!f() { git log --oneline --all --pretty='%C(yellow)%h %C(green)%ad %Creset%s' --date=short --color=always | fzf --ansi  --bind 'enter:execute:git show --color=always {1} | less -R'; }; f"
+  pcommit = "commit --gpg-sign=F123DC4BBEDF21BF --author='Kim Persson <kimpersson88@gmail.com>'"
 
 [core]
   excludesfile = /Users/kim/.gitignore
   pager = delta
+  ignorecase = false
 
 [interactive]
   diffFilter = delta --color-only --features=interactive
@@ -36,9 +34,9 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
   newNormal = green bold
   newHighlight = green bold 22
 [commit]
-  gpgsign = true
+	gpgSign = true
 [gpg]
-  program = /opt/homebrew/bin/gpg
+	program = gpg
 [init]
   templatedir = ~/.git-templates
   defaultBranch = main
@@ -56,5 +54,5 @@ co-pr="!f() { git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; };
 
 [delta]
   line-numbers = true
-  light = true
+  light = false
   show-syntax-themes = true

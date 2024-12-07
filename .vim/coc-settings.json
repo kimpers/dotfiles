@@ -2,10 +2,6 @@
   "typescript.suggest.autoImports": false,
   "javascript.suggest.autoImports": false,
   "prettier.eslintIntegration": true,
-  "prettier.tslintIntegration": true,
-  "tslint.enable": true,
-  "tslint.run": "onSave",
-  "tslint.autoFixOnSave": true,
   "eslint.enable": true,
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
@@ -41,5 +37,25 @@
     }
   },
   "rust.clippy_preference": "on",
-  "rust.unstable_features": true
+  "rust.unstable_features": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.server.extraEnv": {
+    "CARGO_TARGET_DIR": "./.rust_analyzer_target_editor"
+  },
+  "coc.preferences.useQuickfixForLocations": true,
+  "cSpell.words": ["solana", "upsert", "pubkey"],
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "git-commit",
+    "gitcommit",
+    "html",
+    "latex",
+    "markdown",
+    "plaintext",
+    "text",
+    "yaml",
+    "yml"
+  ]
 }
