@@ -12,11 +12,6 @@ function install {
   # ZSH
   ln -sf "$dotfiles_dir/.zshrc" ~/.zshrc
 
-  # Tmux
-  ln -sf "$dotfiles_dir/.tmux.conf" ~/.tmux.conf
-  # Install Tmux Plugin Manager
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
   # Vim
   ln -sf "$dotfiles_dir/.vim/.vimrc" ~/.vimrc
   ln -sf "$dotfiles_dir/.vim" ~/.vim
@@ -34,16 +29,6 @@ function install {
 
   # Editor config
   ln -sf "$dotfiles_dir/.editorconfig" ~/.editorconfig
-
-  # Tmuxinator autocomplete
-  if [ ! -d "~/.bin" ]; then
-    mkdir ~/.bin
-  fi
-
-  ln -sf "$dotfiles_dir/tmuxinator.zsh" ~/.bin/tmuxinator.zsh
-
-  # Powerline patched fonts
-  ./fonts/install.sh
 
   # Enable key repeat for OSX
   defaults write -g ApplePressAndHoldEnabled -bool false
@@ -64,12 +49,6 @@ function install {
 
   # Show hidden files in Finder
   sudo defaults write com.apple.Finder AppleShowAllFiles YES; killall Finder
-
-  # Setup iterm settings file
-  # Specify the preferences directory
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/iterm2"
-  # Tell iTerm2 to use the custom preferences in the directory
-  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
   echo "Installation completed. Enjoy!"
 }

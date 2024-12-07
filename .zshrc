@@ -83,7 +83,6 @@ export GOROOT="$(brew --prefix golang)/libexec"
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-source ~/.bin/tmuxinator.zsh
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -151,6 +150,9 @@ open_select() {
   rg -l "$1" | fzf | xargs nvim
 }
 
+open_match() {
+  rg -l "$1" | xargs nvim
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.dotfiles/.zsh_private ] && source ~/.dotfiles/.zsh_private
