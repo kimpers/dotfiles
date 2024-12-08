@@ -10,13 +10,26 @@
 
   homebrew = {
     enable = true;
-    # onActivation.cleanup = "uninstall";
+    onActivation.cleanup = "uninstall";
 
     taps = [];
-    brews = [];
-    casks = [];
+    brews = [
+      "diff-pdf"
+      "duck"
+      "ffmpeg"
+      "imagemagick"
+      "p7zip"
+    ];
+    casks = [
+      "rar"
+      "smcfancontrol"
+    ];
 
     masApps = {
+      "Bear"= 1091189122;
+      "Telegram"= 747648890;
+      "The Unarchiver"= 425424353;
+      "Todoist"= 585829637;
     };
   };
 }

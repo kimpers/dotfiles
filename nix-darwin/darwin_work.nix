@@ -10,10 +10,23 @@
 
   homebrew = {
     enable = true;
-    # onActivation.cleanup = "uninstall";
+    onActivation.cleanup = "uninstall";
 
     taps = [];
-    brews = [];
+    brews = [
+      "awscli"
+      "kubernetes-cli"
+      "k6"
+      "k9s"
+      "helm"
+      "grpcurl"
+      "kops"
+      "kubeseal"
+      "minikube"
+      "logcli"
+      "mitmproxy"
+      "tfenv"
+    ];
     casks = [];
 
     masApps = {
