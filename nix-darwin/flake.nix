@@ -43,6 +43,15 @@
           ./darwin_work.nix
         ];
       };
+      "Kims-Work-MBP" = nix-darwin.lib.darwinSystem {
+       system = "aarch64-darwin";
+        modules = [
+          configuration
+          ./darwin_settings.nix
+          ./darwin_shared.nix
+          ./darwin_work.nix
+        ];
+      };
     };
   };
 }
