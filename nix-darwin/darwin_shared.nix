@@ -5,7 +5,6 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     [
-
       # General packages
       pkgs.aspell
       pkgs.aspellDicts.en
@@ -35,23 +34,6 @@
       pkgs.rustup
     ];
 
-   environment.darwinConfig = "$HOME/.dotfiles/nix-darwin";
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      "extra-experimental-features" = [ "nix-command" "flakes" ];
-    };
-  };
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs = {
-    gnupg.agent.enable = true;
-    zsh.enable = true;  # default shell on catalina
-  };
-
   homebrew = {
     enable = true;
     # onActivation.cleanup = "uninstall";
@@ -64,28 +46,7 @@
     ];
 
     masApps = {
-     "Yubico Authenticator" = 1497506650;
      "Xcode" = 497799835;
-    };
-  };
-
-
-  system.defaults = {
-    dock = {
-      autohide = true;
-      orientation = "left";
-      show-process-indicators = false;
-      show-recents = false;
-      static-only = true;
-    };
-    finder = {
-      AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      FXEnableExtensionChangeWarning = false;
-    };
-    NSGlobalDomain = {
-      AppleKeyboardUIMode = 3;
-      "com.apple.keyboard.fnState" = true;
     };
   };
 }

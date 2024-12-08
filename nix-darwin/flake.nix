@@ -37,7 +37,10 @@
        system = "aarch64-darwin";
         modules = [
           configuration
-          ./darwin.nix
+          ./darwin_settings.nix
+          ./darwin_shared.nix
+          ./darwin_personal.nix
+          ./darwin_work.nix
         ];
       };
     };
