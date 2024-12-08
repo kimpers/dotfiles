@@ -28,12 +28,14 @@
     };
     finder = {
       AppleShowAllExtensions = true;
+      AppleShowAllFiles = true;
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
     NSGlobalDomain = {
       AppleKeyboardUIMode = 3;
       "com.apple.keyboard.fnState" = true;
+      ApplePressAndHoldEnabled = false;
     };
   };
 }

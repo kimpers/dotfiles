@@ -30,12 +30,6 @@ function install {
   # Editor config
   ln -sf "$dotfiles_dir/.editorconfig" ~/.editorconfig
 
-  # Enable key repeat for OSX
-  defaults write -g ApplePressAndHoldEnabled -bool false
-
-  # Enable non Apple time machines
-  defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1
-
   # Karabiner configuration
   ln -sf "$dotfiles_dir/karabiner" ~/.config
 
@@ -47,8 +41,9 @@ function install {
 
   ln -sf "$dotfiles_dir/.vim/coc-settings.json" ~/.config/nvim
 
-  # Show hidden files in Finder
-  sudo defaults write com.apple.Finder AppleShowAllFiles YES; killall Finder
+  # Cursor Editor
+  ln -sf "$dotfiles_dir/cursor/settings.json" "/Users/kim/Library/Application Support/Cursor/User"
+  ln -sf "$dotfiles_dir/cursor/keybindings.json" "/Users/kim/Library/Application Support/Cursor/User"
 
   echo "Installation completed. Enjoy!"
 }

@@ -23,6 +23,13 @@
     casks = [
       "rar"
       "smcfancontrol"
+      "vlc"
+      "transmission"
+      "discord"
+      "arc"
+      "cleanmymac"
+      "little-snitch"
+      "signal"
     ];
 
     masApps = {

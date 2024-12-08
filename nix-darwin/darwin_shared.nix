@@ -6,20 +6,15 @@
   environment.systemPackages =
     [
       # General packages
-      pkgs.aspell
-      pkgs.aspellDicts.en
-      pkgs.wget
-      pkgs.zip
-
-      # Text and terminal utilities
       pkgs.htop
       pkgs.jq
       pkgs.bat
       pkgs.ripgrep
       pkgs.tree
-      pkgs.tmux
-      #pkgs.unrar # enable allowunfree
+      pkgs.wget
+      pkgs.zip
       pkgs.unzip
+      pkgs.neovim
 
       # Node.js development tools
       pkgs.nodePackages.npm # globally install npm
@@ -47,17 +42,12 @@
       "act"
       "openssl"
       "axel"
-      "bat"
       "cargo-instruments"
       "cmake"
       "gnutls"
-      "pinentry"
-      "pinentry-mac"
       "gnupg"
       "gpgme"
       "pam-u2f"
-      "ykman"
-      "ykpers"
       "openjdk"
       "fd"
       "findutils"
@@ -68,15 +58,12 @@
       "git-delta"
       "gnu-tar"
       "go"
-      "htop"
       "httpie"
       "grep"
       "jd"
-      "jq"
       "just"
       "hub"
       "libfido2"
-      "neovim"
       "luarocks"
       "llvm"
       "n"
@@ -85,12 +72,13 @@
       "shellcheck"
       "trash"
       "watch"
-      "wget"
       "yq"
       "zlib"
       "zplug"
       "zsh"
       "oven-sh/bun/bun"
+      "libtermkey"
+      "ollama"
     ];
     casks = [
       "obsidian"
@@ -99,6 +87,12 @@
       "marta"
       "aerospace"
       "karabiner-elements"
+      "cursor"
+      "spotify"
+      "gpg-suite"
+      "orbstack"
+      "slack"
+      "alfred"
     ];
 
     masApps = {

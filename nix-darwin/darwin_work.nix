@@ -24,10 +24,17 @@
       "kubeseal"
       "minikube"
       "logcli"
-      "mitmproxy"
       "tfenv"
+      # Yubikey
+      "gpg"
+      "ykpers"
+      "pinentry"
+      "pinentry-mac"
+      "ykman"
     ];
-    casks = [];
+    casks = [
+      "mitmproxy"
+    ];
 
     masApps = {
       "Yubico Authenticator" = 1497506650;
