@@ -36,6 +36,7 @@
       AppleKeyboardUIMode = 3;
       "com.apple.keyboard.fnState" = true;
       ApplePressAndHoldEnabled = false;
+      "com.apple.swipescrolldirection" = false;
     };
   };
 }

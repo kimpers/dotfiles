@@ -30,6 +30,7 @@
       "cleanmymac"
       "little-snitch"
       "signal"
+      "slack"
     ];
 
     masApps = {

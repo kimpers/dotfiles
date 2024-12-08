@@ -91,7 +91,6 @@
       "spotify"
       "gpg-suite"
       "orbstack"
-      "slack"
       "alfred"
     ];
 
