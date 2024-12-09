@@ -25,6 +25,7 @@
       "minikube"
       "logcli"
       "tfenv"
+      "protobuf"
       # Yubikey
       "gpg"
       "ykpers"
