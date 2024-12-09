@@ -45,6 +45,9 @@ function install {
   ln -sf "$dotfiles_dir/cursor/settings.json" "/Users/kim/Library/Application Support/Cursor/User"
   ln -sf "$dotfiles_dir/cursor/keybindings.json" "/Users/kim/Library/Application Support/Cursor/User"
 
+  # Aerospace
+  ln -sf "$dotfiles_dir/.aerospace.toml" ~/.aerospace.toml
+
   echo "Installation completed. Enjoy!"
 }
 
