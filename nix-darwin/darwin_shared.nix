@@ -92,11 +92,12 @@
       "gpg-suite"
       "orbstack"
       "alfred"
+      "signal"
     ];
 
     masApps = {
       "Xcode" = 497799835;
-      "Yubico Authenticator" = 1497506650;
+      "Telegram"= 747648890;
     };
   };
 }

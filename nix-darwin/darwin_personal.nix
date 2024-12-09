@@ -29,13 +29,11 @@
       "arc"
       "cleanmymac"
       "little-snitch"
-      "signal"
       "slack"
     ];
 
     masApps = {
       "Bear"= 1091189122;
-      "Telegram"= 747648890;
       "The Unarchiver"= 425424353;
       "Todoist"= 585829637;
     };
