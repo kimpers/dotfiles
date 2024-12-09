@@ -1,0 +1,46 @@
+{
+  "editor.formatOnSave": true,
+  "window.commandCenter": true,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  },
+  "vscode-neovim.neovimExecutablePaths.darwin": "/run/current-system/sw/bin/nvim",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.cargo.allTargets": true,
+  "rust-analyzer.server.extraEnv": {
+    "CARGO_TARGET_DIR": "./.rust_analyzer_target_editor"
+  },
+  "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    }
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredLightColorTheme": "Solarized Light",
+  "[insta-snapshots]": {},
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.ai.experimental.generateCommitMessage.enabled": false,
+  "gitlens.launchpad.indicator.enabled": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.openRepositoryInParentFolders": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "rust-analyzer.server.path": null,
+  "rust-analyzer.check.command": "clippy",
+  "search.exclude": {
+    "**/node_modules": true,
+    ".rust_analyzer_target_*": true
+  }
+}
