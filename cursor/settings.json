@@ -42,5 +42,6 @@
   "search.exclude": {
     "**/node_modules": true,
     ".rust_analyzer_target_*": true
-  }
+  },
+  "window.newWindowProfile": "main"
 }

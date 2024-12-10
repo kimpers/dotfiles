@@ -35,6 +35,8 @@
     ];
     casks = [
       "mitmproxy"
+      "tableplus"
+      "pritunl"
     ];
 
     masApps = {
